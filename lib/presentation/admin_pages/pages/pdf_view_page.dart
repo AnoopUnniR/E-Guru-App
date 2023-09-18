@@ -1,4 +1,5 @@
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -8,7 +9,7 @@ class PdfViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: adminAppbar(title: "Resume"),
       body: SizedBox(
         child: SfPdfViewer.network(
           imageUrlConvert(pdf),

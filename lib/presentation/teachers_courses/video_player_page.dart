@@ -11,7 +11,6 @@ class VideoPlayerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ChapterResponseModel course =
         ModalRoute.of(context)?.settings.arguments as ChapterResponseModel;
-    print(course.video);
     return BlocProvider(
       create: (context) => VideoPlayerBloc(),
       child: Scaffold(

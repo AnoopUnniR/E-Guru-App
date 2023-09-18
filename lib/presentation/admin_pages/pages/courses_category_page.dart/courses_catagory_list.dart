@@ -1,4 +1,3 @@
-
 import 'package:eguru_app/application/admin_page_bloc/addmin_course_catagories/admin_course_category_bloc.dart';
 import 'package:eguru_app/application/admin_page_bloc/admin_home/admin_home_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
@@ -14,8 +13,15 @@ class AdminCoursesCatagoryListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          "Categories",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black,
         actions: [
           IconButton(
+            tooltip: "Add Category",
             icon: const Icon(Icons.add_circle_outline),
             onPressed: () {
               catagoyController.clear();

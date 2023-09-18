@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/admin_pages/admin_home_page.dart';
@@ -43,7 +42,7 @@ class SplashScreen extends StatelessWidget {
             }
             if (state is AuthenticationAccessAcceptedAsAdmin) {
               FocusScope.of(context).unfocus();
-              Timer(const Duration(seconds: 5), () {
+              Timer(const Duration(seconds: 4), () {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -53,7 +52,7 @@ class SplashScreen extends StatelessWidget {
               });
             }
             if (state is AuthenticationAccessAcceptedAsStudent) {
-              Timer(const Duration(seconds: 5), () {
+              Timer(const Duration(seconds: 4), () {
                 Navigator.pushReplacementNamed(context, mainPageRoute,
                     arguments: state.userModel);
               });
@@ -61,7 +60,7 @@ class SplashScreen extends StatelessWidget {
               return;
             }
             if (state is AuthenticationAccessAcceptedAsTeacher) {
-              Timer(const Duration(seconds: 5), () {
+              Timer(const Duration(seconds: 4), () {
                 Navigator.pushReplacementNamed(context, mainPageRoute,
                     arguments: state.userTeacherModel);
               });
@@ -70,7 +69,7 @@ class SplashScreen extends StatelessWidget {
             }
             if (state is AuthenticationAccessRejected) {
               // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              Timer(const Duration(seconds: 5), () {
+              Timer(const Duration(seconds: 4), () {
                 Navigator.pushReplacementNamed(context, loginPageRoute);
               });
               // });
@@ -92,7 +91,9 @@ class SplashScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const CircularProgressIndicator()
+                  const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
                 ],
               ),
             );

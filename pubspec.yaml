@@ -26,6 +26,7 @@ dependencies:
   restart_app: ^1.2.1
   shared_preferences: ^2.2.1
   syncfusion_flutter_pdfviewer: ^22.2.12
+  text_scroll: ^0.2.0
   video_player: ^2.7.1
   web_socket_channel: ^2.4.0
 

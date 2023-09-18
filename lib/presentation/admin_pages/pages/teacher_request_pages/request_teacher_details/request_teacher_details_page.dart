@@ -1,6 +1,8 @@
 import 'package:eguru_app/application/admin_page_bloc/admin_home/admin_home_bloc.dart';
 import 'package:eguru_app/application/admin_page_bloc/admin_requested_teachers-_details/admin_teacher_details_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/teacher_request_pages/request_teacher_details/widgets/verify_button.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_request_pages/teacher_details_column.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +40,7 @@ class AdminRequestTeachersDetailsPage extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: adminAppbar(title: state.teacher!.name),
           body: SafeArea(
             child: SingleChildScrollView(
               child: state.teacher == null
@@ -58,6 +60,7 @@ class AdminRequestTeachersDetailsPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          sbh20,
                           TeacherDetailsColumnWidget(
                               name: state.teacher!.name,
                               email: state.teacher!.email,
@@ -73,11 +76,12 @@ class AdminRequestTeachersDetailsPage extends StatelessWidget {
                             teacherId: state.teacher!.id,
                             verify: true,
                           ),
-                          sbh20,
+                          sbh10,
                           VerifyTeacherButton(
                             teacherId: state.teacher!.id,
                             verify: false,
                           ),
+                          sbh20
                         ],
                       ),
                     ),
@@ -85,49 +89,6 @@ class AdminRequestTeachersDetailsPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class VerifyTeacherButton extends StatelessWidget {
-  const VerifyTeacherButton(
-      {super.key, required this.teacherId, required this.verify});
-  final int teacherId;
-  final bool verify;
-  @override
-  Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width / 100;
-    return SizedBox(
-      width: width * 70,
-      child: BlocBuilder<AdminTeacherDetailsBloc, AdminTeacherDetailsState>(
-        builder: (context, state) {
-          return ElevatedButton(
-            onPressed: () async {
-              if (verify) {
-                BlocProvider.of<AdminTeacherDetailsBloc>(context).add(
-                    AdminTeacherDetailsEvent.verified(teacherId: teacherId));
-              } else {
-                BlocProvider.of<AdminTeacherDetailsBloc>(context)
-                    .add(AdminTeacherDetailsEvent.reject(teacherId: teacherId));
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50.0),
-              ),
-            ),
-            child: verify
-                ? !state.isVerifyLoading
-                    ? textWhite('Verify')
-                    : const CircularProgressIndicator()
-                : !state.isRejectLoading
-                    ? textWhite("Reject")
-                    : const CircularProgressIndicator(),
-          );
-        },
-      ),
     );
   }
 }

@@ -23,7 +23,7 @@ class AddedCoursesPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          iconTheme:const IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           elevation: 0,
           backgroundColor: Colors.transparent,
           title: const Text(
@@ -55,22 +55,26 @@ class AddedCoursesPage extends StatelessWidget {
                                   CourseResponseModel course =
                                       state.course[index];
                                   String imageUrl =
-                                      "$baseUrl${course.image.split('8000/').last}";
+                                      imageUrlConvert(course.image);
                                   return InkWell(
                                     onTap: () {
                                       BlocProvider.of<TeacherCourseChaperBloc>(
                                               context)
-                                          .add(TeacherCourseChaperEvent.started(
-                                              course.id,),);
+                                          .add(
+                                        TeacherCourseChaperEvent.started(
+                                          course.id,
+                                        ),
+                                      );
                                       Navigator.pushNamed(
                                           context, teacherChaptersPageRoute,
                                           arguments: course.id);
                                     },
                                     child: TeachersCoursesTile(
-                                        width: width,
-                                        imageUrl: imageUrl,
-                                        course: course,
-                                        teacherModel: teacherModel,),
+                                      width: width,
+                                      imageUrl: imageUrl,
+                                      course: course,
+                                      teacherModel: teacherModel,
+                                    ),
                                   );
                                 },
                                 shrinkWrap: true,

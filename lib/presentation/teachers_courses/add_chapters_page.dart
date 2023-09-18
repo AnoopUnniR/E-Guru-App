@@ -1,20 +1,19 @@
 import 'dart:io';
 
-
-
 import 'package:eguru_app/application/add_new_chapter/add_new_chapter_bloc.dart';
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
+import 'package:eguru_app/constants/cancel_button.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_catagory/add_new_chapter_model.dart';
 
-
 import 'package:file_picker/file_picker.dart';
 
 File? video;
+
 class AddNewChapterPage extends StatelessWidget {
   AddNewChapterPage({super.key});
   final TextEditingController titleController = TextEditingController();
@@ -131,9 +130,9 @@ class AddNewChapterPage extends StatelessWidget {
                                       order: int.parse(orderController.text),
                                       course: courseId);
                               BlocProvider.of<AddNewChapterBloc>(context).add(
-                                  AddNewChapterEvent.started(
-                                      createChapterModel: chapterModel),
-                                    );
+                                AddNewChapterEvent.started(
+                                    createChapterModel: chapterModel),
+                              );
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -152,21 +151,7 @@ class AddNewChapterPage extends StatelessWidget {
                     },
                   ),
                   sbh20,
-                  SizedBox(
-                    width: width * 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      child: textWhite('Cancel'),
-                    ),
-                  ),
+                  cancelButtonWidget(width, context),
                   sbh20
                 ],
               ),

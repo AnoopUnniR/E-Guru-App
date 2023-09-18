@@ -1,6 +1,7 @@
 import 'package:eguru_app/application/admin_page_bloc/admin_students_list/admin_students_list_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,7 @@ class AdminStudentsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 100;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: adminAppbar(title: "Students"),
       body: SafeArea(
           child: BlocBuilder<AdminStudentsListBloc, AdminStudentsListState>(
         builder: (context, state) {

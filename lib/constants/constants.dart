@@ -97,13 +97,15 @@ showCustomSnackbar({required String message, required BuildContext context}) {
     ),
   );
 }
+
 imageUrlConvert(String url) {
-  if (url[0] == "/") {
-    String imageUrl = "$baseUrlImage${url.split('8000/').last}";
-    // print(imageUrl);
+  print(url);
+  print("lllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+  if (url.contains("shop")) {
+    String imageUrl = "$baseUrl${url.split('shop/').last}";
+    print(imageUrl);
     return imageUrl;
   }
-  String imageUrl = "$baseUrl${url.split('8000/').last}";
-  // print(imageUrl);
+  String imageUrl = "$baseUrl2$url";
   return imageUrl;
 }

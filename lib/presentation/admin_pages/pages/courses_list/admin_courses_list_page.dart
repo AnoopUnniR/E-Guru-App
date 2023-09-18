@@ -1,5 +1,6 @@
 import 'package:eguru_app/application/admin_page_bloc/admin_chapters_list/admin_chapters_list_bloc.dart';
 import 'package:eguru_app/application/admin_page_bloc/admin_courses/admin_courses_bloc.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/courses_list/admin_course_tiles.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_details_pages/teacher_chapter_page.dart';
 import 'package:flutter/material.dart';
@@ -7,18 +8,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
 
 class AdminCoursesPage extends StatelessWidget {
-  const AdminCoursesPage({super.key,});
+  const AdminCoursesPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: adminAppbar(title: "Courses"),
       body: SafeArea(
-          child: BlocConsumer<AdminCoursesBloc,
-              AdminCoursesState>(
-        listener: (context, state) {
-
-        },
+          child: BlocConsumer<AdminCoursesBloc, AdminCoursesState>(
+        listener: (context, state) {},
         builder: (context, state) {
           return ListView.builder(
             itemCount: state.courses.length,
@@ -29,18 +29,19 @@ class AdminCoursesPage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       BlocProvider.of<AdminChaptersListBloc>(context).add(
-                          AdminChaptersListEvent.started(courseId: course.courseId),
-                        );
+                        AdminChaptersListEvent.started(
+                            courseId: course.courseId),
+                      );
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                AdminTeacherChaptersPage(courseId: course.courseId),
-                          ),
-                        );
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdminTeacherChaptersPage(
+                              courseId: course.courseId),
+                        ),
+                      );
                     },
-                    child:AdminCourseDetailsWidget(
-                    course: course,
+                    child: AdminCourseDetailsWidget(
+                      course: course,
                     ),
                   ),
                   Align(
@@ -56,11 +57,10 @@ class AdminCoursesPage extends StatelessWidget {
                             actions: [
                               ElevatedButton(
                                 onPressed: () {
-                                  BlocProvider.of<AdminCoursesBloc>(
-                                          context)
+                                  BlocProvider.of<AdminCoursesBloc>(context)
                                       .add(AdminCoursesEvent.deleted(
-                                          coursesID: course.courseId,
-                                      ));
+                                    coursesID: course.courseId,
+                                  ));
                                   Navigator.pop(context);
                                 },
                                 child: const Text("Delete"),

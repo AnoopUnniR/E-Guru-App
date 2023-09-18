@@ -1,16 +1,11 @@
-
-
 import 'package:eguru_app/application/profile_page/profile_page_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/presentation/main_page.dart/widgets/bottom_nav.dart';
-import 'package:eguru_app/presentation/profile_page/widgets/details_text.dart';
 import 'package:eguru_app/presentation/profile_page/widgets/logout_button.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, required this.userModel});
@@ -18,6 +13,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 100;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<ProfilePageBloc>(context).add(ProfilePageUpdateEvent());
+    });
     return Container(
       decoration: scaffoldBackgroundDecoration(),
       child: Scaffold(
@@ -36,14 +34,14 @@ class ProfilePage extends StatelessWidget {
             "Profile",
             style: TextStyle(color: Colors.white, fontSize: 30),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ))
-          ],
+          // actions: [
+          // IconButton(
+          //     onPressed: () {},
+          //     icon: const Icon(
+          //       Icons.edit,
+          //       color: Colors.white,
+          //     ))
+          // ],
         ),
         body: SafeArea(
           child: userProfile(width, userModel, context),
@@ -66,21 +64,21 @@ class ProfilePage extends StatelessWidget {
               width: width * 55,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(imageUrlConvert(userModel.image!)),
+                  image: NetworkImage(imageUrlConvert(userModel.image!),),
                 ),
                 color: Colors.white,
                 borderRadius: BorderRadiusDirectional.circular(10),
               ),
             ),
             sbh40,
-            TextDetailsWidget(
-              data: userModel.name,
-              head: "Name",
+            Text(
+              userModel.name,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             sbh20,
-            TextDetailsWidget(
-              data: userModel.email,
-              head: "Email",
+            Text(
+              userModel.email,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
             const Spacer(),
             const LogOutButton(),

@@ -8,7 +8,7 @@ class InputField extends StatelessWidget {
   final bool enabled;
   final int? maxLength;
   final int? maxLines;
-
+  final int? minLines;
   const InputField(
       {super.key,
       required this.label,
@@ -17,6 +17,7 @@ class InputField extends StatelessWidget {
       this.obscureText = false,
       this.enabled = true,
       this.maxLength,
+      this.minLines,
       this.maxLines = 1});
 
   @override
@@ -25,6 +26,7 @@ class InputField extends StatelessWidget {
     return SizedBox(
       width: width * 70,
       child: TextFormField(
+        minLines: minLines,
         maxLines: maxLines,
         maxLength: maxLength,
         enabled: enabled,
@@ -33,6 +35,7 @@ class InputField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
+          // counterStyle: const TextStyle(fontSize: 0),
           focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(50),
@@ -55,7 +58,7 @@ class InputField extends StatelessWidget {
           labelStyle: const TextStyle(color: Colors.white54),
           contentPadding:
               const EdgeInsets.only(left: 50, top: 20, bottom: 20, right: 50),
-          hintStyle: const TextStyle(color: Colors.white),
+          hintStyle: const TextStyle(color: Color.fromARGB(255, 199, 173, 173)),
         ),
       ),
     );

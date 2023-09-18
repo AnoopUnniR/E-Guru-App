@@ -1,3 +1,4 @@
+import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/api_endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
     VideoPlayerController videoPlayerController;
     on<Started>((event, emit) async {
       emit(const VideoPlayerState.loading());
-      String videoUrl = "$baseUrl${event.videoUrl.split('8000/').last}";
+      String videoUrl = imageUrlConvert(event.videoUrl);
       videoPlayerController =
           VideoPlayerController.networkUrl(Uri.parse(videoUrl));
       await videoPlayerController.initialize();

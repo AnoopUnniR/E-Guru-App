@@ -11,7 +11,8 @@ class TeacherDetailsColumnWidget extends StatelessWidget {
       required this.country,
       required this.qualification,
       required this.status,
-      required this.resume, required this.lastLogin});
+      required this.resume,
+      required this.lastLogin});
 
   final String name;
   final String email;
@@ -36,10 +37,16 @@ class TeacherDetailsColumnWidget extends StatelessWidget {
             sbh10,
             texttDetailsWidget(title: "Mobile", value: mobile),
             sbh10,
-            texttDetailsWidget(title: "Country", value: country),
+            SizedBox(
+              width: width - 60,
+              child: texttDetailsWidget(title: "Country", value: country),
+            ),
             sbh10,
-            texttDetailsWidget(
-                title: "Qualification", value: qualification),
+            SizedBox(
+              width: width - 60,
+              child: texttDetailsWidget(
+                  title: "Qualification", value: qualification),
+            ),
             sbh10,
             SizedBox(
                 width: width - 60,
@@ -84,13 +91,27 @@ class TeacherDetailsColumnWidget extends StatelessWidget {
     );
   }
 
-  Text dateDetailsWidget({required String value}) {
+  Column dateDetailsWidget({required String value}) {
     List val = value.split(" ");
     String date = val.first.toString().split("-").reversed.join("-");
     String time = val.last.toString().split(".").first;
-    return Text(
-      "Last Login\n\nDate : $date\nTime : $time  ",
-      style: const TextStyle(fontSize: 20, color: Colors.black),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Last Login",
+          style: TextStyle(
+              fontSize: 23, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Date : $date",
+          style: const TextStyle(fontSize: 20, color: Colors.black),
+        ),
+        Text(
+          "Time : $time",
+          style: const TextStyle(fontSize: 20, color: Colors.black),
+        ),
+      ],
     );
   }
 }

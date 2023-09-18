@@ -1,11 +1,10 @@
-
 import 'package:eguru_app/application/favorites/favourites_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/courses_page/widgets/favorites_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
-
+import 'package:text_scroll/text_scroll.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({
@@ -52,43 +51,50 @@ class CourseCard extends StatelessWidget {
                         ),
                       ),
                       sbw20,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          sbh20,
-                          Text(
-                            course.title,
-                            style: const TextStyle(
+                      Container(
+                        width: width > 10 ? width * 25 : width * 40,
+                        constraints: const BoxConstraints(maxWidth: 400),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            sbh20,
+                            SizedBox(
+                              width: width > 10 ? width * 25 : width * 40,
+                              child: TextScroll(
+                                course.title,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ),
+                            sbh10,
+                            Text(
+                              course.teacherName,
+                              style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 25,
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                          sbh10,
-                          Text(
-                            course.teacherName,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          sbh10,
-                          Text(
-                            course.duration,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
+                            sbh10,
+                            Text(
+                              course.duration,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          sbh10,
-                          Text(
-                            course.averageRating ?? "null",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
+                            sbh10,
+                            Text(
+                              course.averageRating ?? "No Reviews Yet",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          sbh10,
-                        ],
+                            sbh10,
+                          ],
+                        ),
                       ),
                     ],
                   ),

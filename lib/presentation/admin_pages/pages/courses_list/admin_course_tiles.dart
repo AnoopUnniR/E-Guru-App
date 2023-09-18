@@ -1,12 +1,10 @@
 import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class AdminCourseDetailsWidget extends StatelessWidget {
-  const AdminCourseDetailsWidget ({
-    super.key,
-    required this.course
-  }); 
+  const AdminCourseDetailsWidget({super.key, required this.course});
   final CourseModel course;
   @override
   Widget build(BuildContext context) {
@@ -33,8 +31,7 @@ class AdminCourseDetailsWidget extends StatelessWidget {
                     height: width * 30,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image:
-                              NetworkImage(imageUrlConvert(course.image)),
+                          image: NetworkImage(imageUrlConvert(course.image)),
                           fit: BoxFit.cover),
                     ),
                   ),
@@ -43,16 +40,21 @@ class AdminCourseDetailsWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       sbh20,
-                      Text(
-                        course.title,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            overflow: TextOverflow.ellipsis),
+                      SizedBox(
+                        width: width * 50,
+                        child: TextScroll(
+                          course.title,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              overflow: TextOverflow.ellipsis),
+                        ),
                       ),
                       sbh10,
+                      Text("Teacher : ${course.teacherName}"),
+                      sbh10,
                       Text(
-                      "Level : ${course.level}",
+                        "Level : ${course.level}",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -67,22 +69,6 @@ class AdminCourseDetailsWidget extends StatelessWidget {
                         ),
                       ),
                       sbh10,
-                      Text(
-                         "Enrolments : ${course.enrollments.toString()}",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
-                      ),
-                      sbh10,
-                      Text(
-                         "Catagory : ${course.category.name}",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
-                      ),
-                      sbh10,
                     ],
                   ),
                 ],
@@ -90,12 +76,35 @@ class AdminCourseDetailsWidget extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
+                    width: (width * 30) + 10,
+                    child: Text(
+                      "Enrolments : ${course.enrollments.toString()}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                  sbw10,
+                  Text(
+                    "Catagory : ${course.category.name}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  sbh10
+                ],
+              ),
+              sbh10,
+              Row(
+                children: [
+                  SizedBox(
                     width: width * 80,
                     child: Text(
                       "Description:\n       ${course.desc}",
                       style: const TextStyle(
-                          color: Colors.white,
-                          overflow: TextOverflow.ellipsis),
+                          color: Colors.white, overflow: TextOverflow.ellipsis),
                     ),
                   ),
                 ],

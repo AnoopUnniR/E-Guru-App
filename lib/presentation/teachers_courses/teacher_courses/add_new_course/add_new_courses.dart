@@ -1,9 +1,9 @@
 import 'dart:io';
 
-
 import 'package:eguru_app/application/add_new_course/add_new_course_bloc.dart';
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
+import 'package:eguru_app/constants/cancel_button.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/course_catagory/course_response_model.dart';
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
@@ -16,7 +16,6 @@ import 'package:eguru_app/domain/models/course_catagory/catagory_model.dart';
 import 'package:eguru_app/domain/models/course_catagory/create_course_model.dart';
 
 import 'package:image_picker/image_picker.dart';
-
 
 // ignore: must_be_immutable
 class AddNewCoursesPage extends StatelessWidget {
@@ -242,6 +241,7 @@ class AddNewCoursesPage extends StatelessWidget {
                               )
                             : ElevatedButton(
                                 onPressed: () async {
+                                  FocusScope.of(context).unfocus();
                                   if (imagevalueNotifier.value == null ||
                                       titleCotroller.text.trim().isEmpty ||
                                       levelController.text.trim().isEmpty ||
@@ -291,21 +291,7 @@ class AddNewCoursesPage extends StatelessWidget {
                     ),
                   ),
                   sbh20,
-                  SizedBox(
-                    width: width * 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      child: textWhite('Cancel'),
-                    ),
-                  ),
+                  cancelButtonWidget(width, context),
                   sbh20
                 ],
               ),

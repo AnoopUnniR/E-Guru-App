@@ -2,6 +2,7 @@ import 'package:eguru_app/application/admin_page_bloc/admin_requested_teachers-_
 import 'package:eguru_app/application/admin_page_bloc/admin_teachers_courses/admin_teacher_courses_list_bloc.dart';
 import 'package:eguru_app/application/admin_page_bloc/admin_teachers_details/admin_teacher_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_details_pages/teachers_courses_page.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_request_pages/teacher_details_column.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class AdminTeachersDetailsPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: adminAppbar(title: state.teacher!.name),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Center(

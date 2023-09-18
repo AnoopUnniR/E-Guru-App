@@ -1,21 +1,16 @@
 import 'dart:io';
 
-
-import 'package:eguru_app/application/profile_page/profile_page_bloc.dart';
-import 'package:eguru_app/application/teachers_registration/teacher_registration_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
+import 'package:eguru_app/presentation/login_pages/teacher_signup/widgets/signup_button.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:eguru_app/domain/models/teachers_model/teachers_model.dart';
-
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-final ValueNotifier<CroppedFile?> signupImage = ValueNotifier(null);
+File? resume;
 
 class TeacherSignupPage extends StatelessWidget {
   TeacherSignupPage({super.key});
@@ -28,10 +23,10 @@ class TeacherSignupPage extends StatelessWidget {
   final TextEditingController pdfController = TextEditingController();
   final TextEditingController skillController = TextEditingController();
   final ProfileImage profileImageFunc = ProfileImage();
+  final ValueNotifier<CroppedFile?> signupImage = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
-    File? resume;
     final UserModel userModel =
         ModalRoute.of(context)?.settings.arguments as UserModel;
     double width = MediaQuery.of(context).size.width / 100;
@@ -115,6 +110,7 @@ class TeacherSignupPage extends StatelessWidget {
                   ),
                   sbh20,
                   InputField(
+                    maxLength: 13,
                     label: "Phone Number",
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
@@ -157,15 +153,18 @@ class TeacherSignupPage extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 5, right: 10),
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.white,),),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  Colors.white,
+                                ),
+                              ),
                               child: const Text(
                                 "Insert",
                                 style: TextStyle(color: Colors.black),
                               ),
                               onPressed: () async {
                                 resume = await uploadPdf();
+                                print(resume);
                               },
                             ),
                           ),
@@ -174,71 +173,16 @@ class TeacherSignupPage extends StatelessWidget {
                     ),
                   ),
                   sbh40,
-                  BlocProvider(
-                    create: (context) => TeacherRegistrationBloc(),
-                    child: BlocConsumer<TeacherRegistrationBloc,
-                        TeacherRegistrationState>(
-                      listener: (context, state) {
-                        if (state is TeacherRegistrationApplied) {
-                          BlocProvider.of<ProfilePageBloc>(context)
-                              .add(ProfilePageUpdateEvent());
-                          showCustomSnackbar(
-                              message:
-                                  "Your request to enrol as a teacher has been successfully applied. we will notify you when it is verifed",
-                              context: context);
-                          Navigator.pop(context);
-                        }
-                      },
-                      builder: (context, state) {
-                        return SizedBox(
-                          width: width * 70,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (signupImage.value == null) {
-                                showCustomSnackbar(
-                                    message: "please enter a profile picture",
-                                    context: context);
-                                return;
-                              }
-                              if (resume == null) {
-                                showCustomSnackbar(
-                                    message: "please fill all the fields",
-                                    context: context);
-                                return;
-                              }
-                              TeacherApplyModel teacherApplyModel =
-                                  TeacherApplyModel(
-                                      name: nameController.text,
-                                      mobileNumber: phoneController.text,
-                                      resume: resume!,
-                                      address: adressController.text,
-                                      country: countryController.text,
-                                      highestQualification:
-                                          educationController.text,
-                                      skills: skillController.text,
-                                      image: signupImage.value!);
-                              BlocProvider.of<TeacherRegistrationBloc>(context)
-                                  .add(
-                                TeachersRegistrationSubmittedEvent(
-                                    teacherApplyModel: teacherApplyModel),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 233, 9, 210),
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                            ),
-                            child: (state is TeacherRegistrationLoading)
-                                ? const CircularProgressIndicator()
-                                : textWhite('Apply Form'),
-                          ),
-                        );
-                      },
-                    ),
+                  ApplyFormButton(
+                    signupImage: signupImage.value,
+                    width: width,
+                    resume: resume,
+                    nameController: nameController,
+                    phoneController: phoneController,
+                    adressController: adressController,
+                    countryController: countryController,
+                    educationController: educationController,
+                    skillController: skillController,
                   ),
                   sbh20,
                   SizedBox(
@@ -248,6 +192,7 @@ class TeacherSignupPage extends StatelessWidget {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 162, 11, 0),
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0),
@@ -294,7 +239,8 @@ class TeacherSignupPage extends StatelessWidget {
           ListTile(
             onTap: () async {
               Navigator.pop(context);
-              // imageFile = await profileImage.selectImage(ImageSource.camera);
+              signupImage.value =
+                  await profileImageFunc.selectImage(ImageSource.camera);
             },
             leading: const Icon(Icons.camera_alt),
             title: const Text("Capture Live"),

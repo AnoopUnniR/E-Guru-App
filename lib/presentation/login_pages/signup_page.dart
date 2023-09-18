@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:eguru_app/application/signup_bloc/signup_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/signup_model.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -60,16 +58,39 @@ class SignupScreen extends StatelessWidget {
                           builder: (context, state) {
                             if (state is SignupImageLoading) {
                               imageFile = state.image;
-                              return CircleAvatar(
-                                radius: 100,
-                                backgroundImage:
-                                    FileImage(File(state.image.path)),
-                              );
                             }
-                            return const CircleAvatar(
-                              radius: 100,
-                              backgroundImage:
-                                  AssetImage("assets/profilepic.jpg"),
+                            return SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: Stack(
+                                children: [
+                                  imageFile == null
+                                      ? const CircleAvatar(
+                                          radius: 100,
+                                          backgroundImage: AssetImage(
+                                            "assets/profilepic.jpg",
+                                          ),
+                                        )
+                                      : CircleAvatar(
+                                          radius: 100,
+                                          backgroundImage: FileImage(
+                                            File(imageFile!.path),
+                                          ),
+                                        ),
+                                  const Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: Icon(
+                                        Icons.add_a_photo_outlined,
+                                        color: Color.fromARGB(255, 233, 9, 210),
+                                        size: 40,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             );
                           },
                         ),

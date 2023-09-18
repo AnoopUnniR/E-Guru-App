@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
 
 part 'chat_bloc_event.dart';
 part 'chat_bloc_state.dart';
@@ -26,6 +27,7 @@ class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
       add(const Update());
     });
 
+
     on<_Started>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final response = await chatRepository.getAllChats(event.courseName);
@@ -41,10 +43,7 @@ class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
     });
 
     on<Send>((event, emit) async {
-      print(event.message);
       channel.sink.add(json.encode(event.message.toJson()));
-      final val = await channel.ready.asStream();
-      print(val);
     });
     on<Update>((event, emit) {
       emit(Reload(chats: chats, isLoading: false, isError: false));

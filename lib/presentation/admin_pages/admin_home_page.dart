@@ -4,6 +4,7 @@ import 'package:eguru_app/application/admin_page_bloc/admin_home/admin_home_bloc
 import 'package:eguru_app/application/admin_page_bloc/admin_students_list/admin_students_list_bloc.dart';
 import 'package:eguru_app/application/admin_page_bloc/admin_teachers_list/admin_teachers_list_page_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/courses_category_page.dart/courses_catagory_list.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/courses_list/admin_courses_list_page.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/students_page/students_page.dart';
@@ -19,13 +20,9 @@ class AdminHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width / 100;
     return Scaffold(
-      appBar: AppBar(
-        title: blText("welcome admin"),
-        centerTitle: true,
-      ),
-      drawer: const AdminDrawerWidget(),
+      appBar: adminAppbar(title: "Welcome Admin"),
+      drawer: const SizedBox(height: 400, child: AdminDrawerWidget()),
       body: BlocBuilder<AdminHomeBloc, AdminHomeState>(
         builder: (context, state) {
           return SafeArea(
@@ -176,50 +173,52 @@ class AdminDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+        backgroundColor: Colors.black,
         child: ListView(
-      children: [
-        ListTile(
-          title: const Text(
-            "Log Out",
-            style: TextStyle(color: Colors.black),
-          ),
-          onTap: () {
-            Navigator.pop(context);
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title:
-                    const Text('Logout', style: TextStyle(color: Colors.black)),
-                content: const Text(
-                  'Are you sure you want to log out?',
-                  style: TextStyle(color: Colors.black),
-                ),
-                actions: [
-                  ElevatedButton(
-                    child: const Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  ElevatedButton(
-                    child: const Text('Logout'),
-                    onPressed: () {
-                      SaveToken.deleteToken();
-                      Navigator.of(context).pop();
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        loginPageRoute,
-                        (route) => false,
-                      );
-                    },
-                  ),
-                ],
+          children: [
+            ListTile(
+              hoverColor: Colors.grey,
+              title: const Text(
+                "Log Out",
+                style: TextStyle(color: Colors.white),
               ),
-            );
-          },
-        )
-      ],
-    ));
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Logout',
+                        style: TextStyle(color: Colors.black)),
+                    content: const Text(
+                      'Are you sure you want to log out?',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                        child: const Text('Logout'),
+                        onPressed: () {
+                          SaveToken.deleteToken();
+                          Navigator.of(context).pop();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            loginPageRoute,
+                            (route) => false,
+                          );
+                        },
+                      ),
+                      ElevatedButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            )
+          ],
+        ));
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class TeachersCoursesTile extends StatelessWidget {
   TeachersCoursesTile({
@@ -65,10 +66,20 @@ class TeachersCoursesTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               sbh10,
-                              Text(
-                                course.title,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 25),
+                              SizedBox(
+                                width: width * 40,
+                                child: TextScroll(
+                                  delayBefore: const Duration(seconds: 3),
+                                  pauseBetween: const Duration(seconds: 3),
+                                  numberOfReps: 4,
+                                  intervalSpaces: 10,
+                                  pauseOnBounce: const Duration(seconds: 1),
+                                  course.title,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      overflow: TextOverflow.ellipsis),
+                                ),
                               ),
                               sbh5,
                               Text(

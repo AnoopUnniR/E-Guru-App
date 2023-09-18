@@ -2,11 +2,13 @@ import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/course_catagory/course_response_model.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class AdminCourseCard extends StatelessWidget {
   const AdminCourseCard({
     super.key,
-    required this.course, required this.teacher,
+    required this.course,
+    required this.teacher,
   });
   final CourseResponseModel course;
   final UserTeacherModel teacher;
@@ -48,16 +50,22 @@ class AdminCourseCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           sbh20,
-                          Text(
-                            course.title,
-                            style: const TextStyle(
+                          SizedBox(
+                            width: width * 50,
+                            child: TextScroll(
+                              delayBefore: const Duration(seconds: 3),
+                              pauseBetween: const Duration(seconds: 3),
+                              course.title,
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
-                                overflow: TextOverflow.ellipsis),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ),
                           sbh10,
                           Text(
-                          "Level : ${course.level}",
+                            "Level : ${course.level}",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -73,7 +81,7 @@ class AdminCourseCard extends StatelessWidget {
                           ),
                           sbh10,
                           Text(
-                             "Enrolments : ${course.enrollments.toString()}",
+                            "Enrolments : ${course.enrollments.toString()}",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,

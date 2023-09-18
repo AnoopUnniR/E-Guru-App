@@ -35,55 +35,31 @@ class CoursesPage extends StatelessWidget {
                       ? const Center(
                           child: Text("No courses Found"),
                         )
-                      : width < 10
-                          ? ListView.builder(
-                              padding: const EdgeInsets.all(16),
-                              itemCount: state.courses.length,
-                              itemBuilder: (context, index) {
-                                CourseModel course = state.courses[index];
-                                return InkWell(
-                                  onTap: () {
-                                    BlocProvider.of<CourseDetailsBloc>(context)
-                                        .add(
-                                      ChapterLoading(
-                                        courseId: course.courseId,
-                                      ),
-                                    );
-                                    Navigator.pushNamed(
-                                        context, courseDetailsPageRoute,
-                                        arguments: course);
-                                  },
-                                  child:
-                                      CourseCard(width: width, course: course),
+                      :
+                      GridView.builder(
+                          itemCount: state.courses.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: width > 10
+                                      ? (width * 100) / 480
+                                      : ((width * 100) / 240),
+                                  crossAxisCount: width > 10 ? 2 : 1),
+                          itemBuilder: (context, index) {
+                            CourseModel course = state.courses[index];
+                            return
+                                InkWell(
+                              onTap: () {
+                                BlocProvider.of<CourseDetailsBloc>(context).add(
+                                  ChapterLoading(courseId: course.courseId),
                                 );
+                                Navigator.pushNamed(
+                                    context, courseDetailsPageRoute,
+                                    arguments: course);
                               },
-                            )
-                          : GridView.builder(
-                              itemCount: state.courses.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: (width * 100) / 480,
-                                      crossAxisCount: 2),
-                              itemBuilder: (context, index) {
-                                CourseModel course = state.courses[index];
-                                return
-                                    //  course.teacherId == savedUserId
-                                    //     ? const SizedBox()
-                                    //     :
-                                    InkWell(
-                                  onTap: () {
-                                    BlocProvider.of<CourseDetailsBloc>(context)
-                                        .add(
-                                      ChapterLoading(courseId: course.courseId),
-                                    );
-                                    Navigator.pushNamed(
-                                        context, courseDetailsPageRoute,
-                                        arguments: course);
-                                  },
-                                  child:
-                                      CourseCard(width: width, course: course),
-                                );
-                              }),
+                              child: CourseCard(width: width, course: course),
+                            );
+                          },
+                        ),
                 ),
               ],
             ),

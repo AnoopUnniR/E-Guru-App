@@ -17,7 +17,7 @@ class TeacherListTileWidget extends StatelessWidget {
     return Card(
       child: Container(
         padding: const EdgeInsets.all(8),
-        height: 70,
+        height: 80,
         width: width * 90,
         decoration: const BoxDecoration(),
         child: Row(children: [
@@ -52,9 +52,9 @@ class TeacherListTileWidget extends StatelessWidget {
                 Text(
                   teacher.email,
                   style: TextStyle(
-                    fontSize: width * 4,
-                    color: Colors.black,
-                  ),
+                      fontSize: width * 4,
+                      color: Colors.black,
+                      overflow: TextOverflow.ellipsis),
                 )
               ],
             ),

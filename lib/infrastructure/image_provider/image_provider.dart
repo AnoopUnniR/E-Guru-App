@@ -1,4 +1,4 @@
-import 'package:eguru_app/domain/api_endpoints.dart';
+import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/widgets.dart';
 
 class ImageProviderClass {
@@ -11,7 +11,7 @@ class ImageProviderClass {
       if (userModel.image.toString().contains("null")) {
         imageProvider = const AssetImage("assets/home_banner.jpg");
       } else {
-        imageProvider = NetworkImage("$baseUrlImage${userModel.image!}");
+        imageProvider = NetworkImage(imageUrlConvert(userModel.image));
       }
     }
     return imageProvider;

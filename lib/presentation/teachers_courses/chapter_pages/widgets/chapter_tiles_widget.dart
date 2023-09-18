@@ -1,10 +1,10 @@
-
 import 'package:eguru_app/application/admin_page_bloc/admin_chapters_list/admin_chapters_list_bloc.dart';
 import 'package:eguru_app/application/teacher_chapter/teacher_course_chaper_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class ChapterTilesWidget extends StatelessWidget {
   const ChapterTilesWidget({
@@ -49,9 +49,14 @@ class ChapterTilesWidget extends StatelessWidget {
               ),
             ),
             sbw20,
-            Text(
-              chapter.title,
-              style: const TextStyle(color: Colors.white, fontSize: 25),
+            SizedBox(
+              width: width * 55,
+              child: TextScroll(
+                delayBefore: const Duration(seconds: 3),
+                pauseBetween: const Duration(seconds: 3),
+                chapter.title,
+                style: const TextStyle(color: Colors.white, fontSize: 25),
+              ),
             ),
             const Spacer(),
             IconButton(

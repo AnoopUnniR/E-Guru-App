@@ -2,6 +2,7 @@ import 'package:eguru_app/application/admin_page_bloc/admin_chapters_list/admin_
 import 'package:eguru_app/application/admin_page_bloc/admin_teachers_courses/admin_teacher_courses_list_bloc.dart';
 import 'package:eguru_app/domain/models/course_catagory/course_response_model.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
+import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_details_pages/teacher_chapter_page.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/teacher_details_pages/widgets/course_cards.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class AdminTeachersCoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: adminAppbar(title: "Courses"),
       body: SafeArea(
           child: BlocConsumer<AdminTeacherCoursesListBloc,
               AdminTeacherCoursesListState>(

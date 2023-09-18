@@ -3,14 +3,14 @@
 ///use this url in case of running app using backend in local server
 // const String baseUrl = "http://10.0.2.2:8000/";
 // const String websocketUrl = "10.0.2.2:8000";
+//  const String baseUrl2 = "http://10.0.2.2:8000";
 
 // const String baseUrl = "http://127.0.0.1:8000/";
 // const String websocketUrl = "127.0.0.1:8000";
 
-const String baseUrlImage = "https://egurubackend.online";
+const String baseUrl2 = "https://egurubackend.online";
 const String baseUrl = "https://egurubackend.online/";
 const String websocketUrl = "egurubackend.online";
-// const String baseUrl = "http://egurubackend.online:8001/";
 
 //url for CRUD operations
 class Url {
