@@ -14,7 +14,7 @@ SizedBox cancelButtonWidget(double width, BuildContext context) {
                         borderRadius: BorderRadius.circular(50.0),
                       ),
                     ),
-                    child: textWhite('Cancel'),
+                    child:const Text('Cancel'),
                   ),
                 );
   }

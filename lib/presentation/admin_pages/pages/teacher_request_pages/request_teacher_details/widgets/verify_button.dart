@@ -35,10 +35,10 @@ class VerifyTeacherButton extends StatelessWidget {
             ),
             child: verify
                 ? !state.isVerifyLoading
-                    ? textWhite('Verify')
+                    ?const Text('Verify')
                     : const CircularProgressIndicator()
                 : !state.isRejectLoading
-                    ? textWhite("Reject")
+                    ?const Text("Reject")
                     : const CircularProgressIndicator(),
           );
         },
