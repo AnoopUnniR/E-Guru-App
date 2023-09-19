@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class ChatButtonWidget extends StatelessWidget {
   const ChatButtonWidget(
       {super.key,
+     
       required this.isVisible,
       required this.courseName,
       required this.chatId});

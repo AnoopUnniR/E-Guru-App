@@ -19,21 +19,21 @@ mixin _$ChatBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String courseName, int chatId) started,
-    required TResult Function(SendMessageModel message) send,
+    required TResult Function(Chat message) send,
     required TResult Function() update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String courseName, int chatId)? started,
-    TResult? Function(SendMessageModel message)? send,
+    TResult? Function(Chat message)? send,
     TResult? Function()? update,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String courseName, int chatId)? started,
-    TResult Function(SendMessageModel message)? send,
+    TResult Function(Chat message)? send,
     TResult Function()? update,
     required TResult orElse(),
   }) =>
@@ -162,7 +162,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String courseName, int chatId) started,
-    required TResult Function(SendMessageModel message) send,
+    required TResult Function(Chat message) send,
     required TResult Function() update,
   }) {
     return started(courseName, chatId);
@@ -172,7 +172,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String courseName, int chatId)? started,
-    TResult? Function(SendMessageModel message)? send,
+    TResult? Function(Chat message)? send,
     TResult? Function()? update,
   }) {
     return started?.call(courseName, chatId);
@@ -182,7 +182,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String courseName, int chatId)? started,
-    TResult Function(SendMessageModel message)? send,
+    TResult Function(Chat message)? send,
     TResult Function()? update,
     required TResult orElse(),
   }) {
@@ -244,7 +244,7 @@ abstract class _$$SendCopyWith<$Res> {
   factory _$$SendCopyWith(_$Send value, $Res Function(_$Send) then) =
       __$$SendCopyWithImpl<$Res>;
   @useResult
-  $Res call({SendMessageModel message});
+  $Res call({Chat message});
 }
 
 /// @nodoc
@@ -263,7 +263,7 @@ class __$$SendCopyWithImpl<$Res>
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as SendMessageModel,
+              as Chat,
     ));
   }
 }
@@ -274,7 +274,7 @@ class _$Send with DiagnosticableTreeMixin implements Send {
   const _$Send({required this.message});
 
   @override
-  final SendMessageModel message;
+  final Chat message;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -310,7 +310,7 @@ class _$Send with DiagnosticableTreeMixin implements Send {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String courseName, int chatId) started,
-    required TResult Function(SendMessageModel message) send,
+    required TResult Function(Chat message) send,
     required TResult Function() update,
   }) {
     return send(message);
@@ -320,7 +320,7 @@ class _$Send with DiagnosticableTreeMixin implements Send {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String courseName, int chatId)? started,
-    TResult? Function(SendMessageModel message)? send,
+    TResult? Function(Chat message)? send,
     TResult? Function()? update,
   }) {
     return send?.call(message);
@@ -330,7 +330,7 @@ class _$Send with DiagnosticableTreeMixin implements Send {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String courseName, int chatId)? started,
-    TResult Function(SendMessageModel message)? send,
+    TResult Function(Chat message)? send,
     TResult Function()? update,
     required TResult orElse(),
   }) {
@@ -376,9 +376,9 @@ class _$Send with DiagnosticableTreeMixin implements Send {
 }
 
 abstract class Send implements ChatBlocEvent {
-  const factory Send({required final SendMessageModel message}) = _$Send;
+  const factory Send({required final Chat message}) = _$Send;
 
-  SendMessageModel get message;
+  Chat get message;
   @JsonKey(ignore: true)
   _$$SendCopyWith<_$Send> get copyWith => throw _privateConstructorUsedError;
 }
@@ -426,7 +426,7 @@ class _$Update with DiagnosticableTreeMixin implements Update {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String courseName, int chatId) started,
-    required TResult Function(SendMessageModel message) send,
+    required TResult Function(Chat message) send,
     required TResult Function() update,
   }) {
     return update();
@@ -436,7 +436,7 @@ class _$Update with DiagnosticableTreeMixin implements Update {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String courseName, int chatId)? started,
-    TResult? Function(SendMessageModel message)? send,
+    TResult? Function(Chat message)? send,
     TResult? Function()? update,
   }) {
     return update?.call();
@@ -446,7 +446,7 @@ class _$Update with DiagnosticableTreeMixin implements Update {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String courseName, int chatId)? started,
-    TResult Function(SendMessageModel message)? send,
+    TResult Function(Chat message)? send,
     TResult Function()? update,
     required TResult orElse(),
   }) {
@@ -497,33 +497,28 @@ abstract class Update implements ChatBlocEvent {
 
 /// @nodoc
 mixin _$ChatBlocState {
-  List<ChatModel> get chats => throw _privateConstructorUsedError;
+// required List<ChatModel> chats,
+  List<Chat> get chats => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         reload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -558,7 +553,7 @@ abstract class $ChatBlocStateCopyWith<$Res> {
           ChatBlocState value, $Res Function(ChatBlocState) then) =
       _$ChatBlocStateCopyWithImpl<$Res, ChatBlocState>;
   @useResult
-  $Res call({List<ChatModel> chats, bool isLoading, bool isError});
+  $Res call({List<Chat> chats, bool isLoading, bool isError});
 }
 
 /// @nodoc
@@ -582,7 +577,7 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
       chats: null == chats
           ? _value.chats
           : chats // ignore: cast_nullable_to_non_nullable
-              as List<ChatModel>,
+              as List<Chat>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -602,7 +597,7 @@ abstract class _$$StartedCopyWith<$Res>
       __$$StartedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ChatModel> chats, bool isLoading, bool isError});
+  $Res call({List<Chat> chats, bool isLoading, bool isError});
 }
 
 /// @nodoc
@@ -623,7 +618,7 @@ class __$$StartedCopyWithImpl<$Res>
       chats: null == chats
           ? _value._chats
           : chats // ignore: cast_nullable_to_non_nullable
-              as List<ChatModel>,
+              as List<Chat>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -640,14 +635,16 @@ class __$$StartedCopyWithImpl<$Res>
 
 class _$Started with DiagnosticableTreeMixin implements Started {
   const _$Started(
-      {required final List<ChatModel> chats,
+      {required final List<Chat> chats,
       required this.isLoading,
       required this.isError})
       : _chats = chats;
 
-  final List<ChatModel> _chats;
+// required List<ChatModel> chats,
+  final List<Chat> _chats;
+// required List<ChatModel> chats,
   @override
-  List<ChatModel> get chats {
+  List<Chat> get chats {
     if (_chats is EqualUnmodifiableListView) return _chats;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chats);
@@ -697,11 +694,9 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         reload,
   }) {
     return started(chats, isLoading, isError);
@@ -710,10 +705,8 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
   }) {
     return started?.call(chats, isLoading, isError);
   }
@@ -721,10 +714,8 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -767,12 +758,12 @@ class _$Started with DiagnosticableTreeMixin implements Started {
 
 abstract class Started implements ChatBlocState {
   const factory Started(
-      {required final List<ChatModel> chats,
+      {required final List<Chat> chats,
       required final bool isLoading,
       required final bool isError}) = _$Started;
 
-  @override
-  List<ChatModel> get chats;
+  @override // required List<ChatModel> chats,
+  List<Chat> get chats;
   @override
   bool get isLoading;
   @override
@@ -789,7 +780,7 @@ abstract class _$$ReloadCopyWith<$Res> implements $ChatBlocStateCopyWith<$Res> {
       __$$ReloadCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ChatModel> chats, bool isLoading, bool isError});
+  $Res call({List<Chat> chats, bool isLoading, bool isError});
 }
 
 /// @nodoc
@@ -810,7 +801,7 @@ class __$$ReloadCopyWithImpl<$Res>
       chats: null == chats
           ? _value._chats
           : chats // ignore: cast_nullable_to_non_nullable
-              as List<ChatModel>,
+              as List<Chat>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -827,14 +818,14 @@ class __$$ReloadCopyWithImpl<$Res>
 
 class _$Reload with DiagnosticableTreeMixin implements Reload {
   const _$Reload(
-      {required final List<ChatModel> chats,
+      {required final List<Chat> chats,
       required this.isLoading,
       required this.isError})
       : _chats = chats;
 
-  final List<ChatModel> _chats;
+  final List<Chat> _chats;
   @override
-  List<ChatModel> get chats {
+  List<Chat> get chats {
     if (_chats is EqualUnmodifiableListView) return _chats;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chats);
@@ -884,11 +875,9 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(
-            List<ChatModel> chats, bool isLoading, bool isError)
+    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         reload,
   }) {
     return reload(chats, isLoading, isError);
@@ -897,10 +886,8 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult? Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
   }) {
     return reload?.call(chats, isLoading, isError);
   }
@@ -908,10 +895,8 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        started,
-    TResult Function(List<ChatModel> chats, bool isLoading, bool isError)?
-        reload,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
+    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
     required TResult orElse(),
   }) {
     if (reload != null) {
@@ -954,12 +939,12 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
 
 abstract class Reload implements ChatBlocState {
   const factory Reload(
-      {required final List<ChatModel> chats,
+      {required final List<Chat> chats,
       required final bool isLoading,
       required final bool isError}) = _$Reload;
 
   @override
-  List<ChatModel> get chats;
+  List<Chat> get chats;
   @override
   bool get isLoading;
   @override

@@ -1,6 +1,5 @@
 
 
-import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
 import 'package:eguru_app/infrastructure/shared_prefernce/token_handler.dart';
@@ -47,7 +46,7 @@ class LogOutButton extends StatelessWidget {
           ),
         );
       },
-      child: textWhite("Log Out"),
+      child: const Text("Log Out"),
     );
   }
 }

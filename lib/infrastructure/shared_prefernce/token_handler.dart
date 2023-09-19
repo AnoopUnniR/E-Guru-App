@@ -1,3 +1,4 @@
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SaveToken {
@@ -8,17 +9,13 @@ class SaveToken {
   }
 
   static Future<String?> retreiveToken() async {
-    // mattey.e("working");
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString(savedToken);
     return token;
   }
 
-  
-
   static Future<void> deleteToken() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(savedToken);
   }
-
 }

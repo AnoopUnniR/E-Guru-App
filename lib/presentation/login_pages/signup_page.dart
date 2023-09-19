@@ -44,8 +44,8 @@ class SignupScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       sbh10,
-                      textWhite('Please enter your details to'),
-                      textWhite("create a new account."),
+                      const Text('Please enter your details to'),
+                      const Text("create a new account."),
                       sbh10,
                       InkWell(
                         onTap: () {
@@ -165,7 +165,7 @@ class SignupScreen extends StatelessWidget {
                               ),
                               child: (state is SignupLoading)
                                   ? const CircularProgressIndicator()
-                                  : textWhite('Sign Up'),
+                                  : const Text('Sign Up'),
                             ),
                           );
                         },
@@ -173,7 +173,7 @@ class SignupScreen extends StatelessWidget {
                       sbh20,
                       SizedBox(
                         child: Column(children: [
-                          textWhite('Already have an account?'),
+                          const Text('Already have an account?'),
                           TextButton(
                             style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,

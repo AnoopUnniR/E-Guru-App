@@ -8,7 +8,7 @@ class ChatBlocEvent with _$ChatBlocEvent {
   }) = _Started;
 
   const factory ChatBlocEvent.send({
-  required SendMessageModel message
+  required Chat message
   })=Send;
 
     const factory ChatBlocEvent.update()=Update;

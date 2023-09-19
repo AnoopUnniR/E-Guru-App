@@ -52,7 +52,7 @@ class SplashScreen extends StatelessWidget {
               });
             }
             if (state is AuthenticationAccessAcceptedAsStudent) {
-              Timer(const Duration(seconds: 4), () {
+              Timer(const Duration(seconds: 0), () {
                 Navigator.pushReplacementNamed(context, mainPageRoute,
                     arguments: state.userModel);
               });
@@ -60,7 +60,7 @@ class SplashScreen extends StatelessWidget {
               return;
             }
             if (state is AuthenticationAccessAcceptedAsTeacher) {
-              Timer(const Duration(seconds: 4), () {
+              Timer(const Duration(seconds: 0), () {
                 Navigator.pushReplacementNamed(context, mainPageRoute,
                     arguments: state.userTeacherModel);
               });

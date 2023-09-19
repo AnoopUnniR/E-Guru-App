@@ -78,7 +78,7 @@ class AddNewCoursesPage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   sbh10,
-                  textWhite('Please enter your course details'),
+                  const Text('Please enter your course details'),
                   sbh20,
                   BlocBuilder<AddNewCourseBloc, AddNewCourseState>(
                     builder: (context, state) {
@@ -237,7 +237,7 @@ class AddNewCoursesPage extends StatelessWidget {
                                 ),
                                 child: state.isLoading
                                     ? const CircularProgressIndicator()
-                                    : textWhite('Save'),
+                                    : const Text('Save'),
                               )
                             : ElevatedButton(
                                 onPressed: () async {
@@ -285,7 +285,7 @@ class AddNewCoursesPage extends StatelessWidget {
                                 ),
                                 child: state.isLoading
                                     ? const CircularProgressIndicator()
-                                    : textWhite('Add Course'),
+                                    : const Text('Add Course'),
                               );
                       },
                     ),

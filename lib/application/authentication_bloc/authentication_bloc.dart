@@ -8,11 +8,12 @@ import 'package:eguru_app/infrastructure/token_decoder/token_decode.dart';
 import 'package:eguru_app/infrastructure/user_data/get_user_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 int savedUserId = 0;
+String savedUserName = '';
+String savedUserPic = '';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -21,8 +22,6 @@ class AuthenticationBloc
   AuthenticationBloc() : super(AuthenticationInitial()) {
     on<AuthenticationCheckEvent>((event, emit) async {
       String? token = await SaveToken.retreiveToken();
-      // token = null;
-      // SaveToken.deleteToken();
       bool isOnline = await checkInternetConnection();
       if (!isOnline) {
         return emit(AutheticationFailedNoInternet());
@@ -33,7 +32,9 @@ class AuthenticationBloc
         if (userResponse.statusCode == 200) {
           UserModel userModel = UserModel.fromJson(userResponse.data);
           savedUserId = userModel.id;
-           if (userModel.isAdmin) {
+          savedUserName = userModel.name;
+          if(!userModel.isAdmin) savedUserPic = userModel.image!;
+          if (userModel.isAdmin) {
             return emit(AuthenticationAccessAcceptedAsAdmin(userModel));
           }
           if (userModel.isStudent) {
@@ -46,8 +47,9 @@ class AuthenticationBloc
               UserTeacherModel teacherModel =
                   UserTeacherModel.fromJson(teacherResponse.data);
               savedUserId = teacherModel.id;
-              return emit(
-                  AuthenticationAccessAcceptedAsTeacher(teacherModel));
+              savedUserName = teacherModel.name;
+              savedUserPic = teacherModel.image;
+              return emit(AuthenticationAccessAcceptedAsTeacher(teacherModel));
             } else {
               return emit(AuthenticationAccessRejected());
             }
@@ -56,7 +58,7 @@ class AuthenticationBloc
           return emit(AuthenticationAccessRejected());
         }
         // await Future.delayed(const Duration(seconds: 5));
-            } catch (e) {
+      } catch (e) {
         emit(AuthenticationAccessRejected());
       }
     });

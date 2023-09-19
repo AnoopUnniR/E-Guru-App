@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/domain/models/login_model.dart';
@@ -34,6 +35,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           if (userResponse.statusCode == 200) {
             UserModel userModel = UserModel.fromJson(userResponse.data);
             savedUserId = userModel.id;
+            savedUserName = userModel.name;
+            if(!userModel.isAdmin) savedUserPic = userModel.image!;
             if (userModel.isAdmin) {
               return emit(LoginCompleteAsAdmin(userModel: userModel));
             }
@@ -55,10 +58,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               }
             }
           } else {
+
             emit(LoginRejected(userResponse.data));
           }
         }
       } catch (e) {
+
         emit(LoginRejected(e.toString()));
       }
     });

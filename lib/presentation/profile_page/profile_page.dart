@@ -95,7 +95,7 @@ class ProfilePage extends StatelessWidget {
                     Navigator.pushNamed(context, teacherSignupPageRoute,
                         arguments: userModel);
                   },
-                  child: textWhite("Do you want to be a teacher here?"),
+                  child: const Text("Do you want to be a teacher here?"),
                 );
               },
             ),
