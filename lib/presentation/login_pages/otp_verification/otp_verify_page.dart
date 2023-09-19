@@ -106,7 +106,7 @@ class OtpVerificationPage extends StatelessWidget {
                             ),
                             child: (state is OtpVerificationRequested)
                                 ? const CircularProgressIndicator()
-                                : textWhite('Verify OTP'),
+                                : const Text('Verify OTP'),
                           ),
                         ),
                         sbh20,

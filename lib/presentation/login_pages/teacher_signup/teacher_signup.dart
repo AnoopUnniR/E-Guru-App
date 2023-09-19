@@ -49,8 +49,8 @@ class TeacherSignupPage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   sbh10,
-                  textWhite('Please enter your details to'),
-                  textWhite("enroll as a teacher"),
+                  const Text('Please enter your details to'),
+                  const Text("enroll as a teacher"),
                   sbh20,
                   InkWell(
                     onTap: () {
@@ -164,7 +164,6 @@ class TeacherSignupPage extends StatelessWidget {
                               ),
                               onPressed: () async {
                                 resume = await uploadPdf();
-                                print(resume);
                               },
                             ),
                           ),
@@ -198,7 +197,7 @@ class TeacherSignupPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(50.0),
                         ),
                       ),
-                      child: textWhite('Cancel'),
+                      child: const Text('Cancel'),
                     ),
                   ),
                   sbh20

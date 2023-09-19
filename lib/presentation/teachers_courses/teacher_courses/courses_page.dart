@@ -127,7 +127,7 @@ class AddedCoursesPage extends StatelessWidget {
                       ),
                       child:
                           //  const CircularProgressIndicator()
-                          textWhite('Add New Course'),
+                          const Text('Add New Course'),
                     ),
                   )
                 ],

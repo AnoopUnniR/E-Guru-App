@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 const profileImage =
     "https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg";
 
-Widget textWhite(String text) => Text(
-      text,
-      style: const TextStyle(color: Colors.white),
-    );
+// Widget textWhite(String text) => Text(
+//       text,
+//       style: const TextStyle(color: Colors.white),
+//     );
 
 const double textFieldWidth = 300;
 const sbw5 = SizedBox(
@@ -99,13 +99,21 @@ showCustomSnackbar({required String message, required BuildContext context}) {
 }
 
 imageUrlConvert(String url) {
-  print(url);
-  print("lllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
   if (url.contains("shop")) {
     String imageUrl = "$baseUrl${url.split('shop/').last}";
-    print(imageUrl);
     return imageUrl;
   }
   String imageUrl = "$baseUrl2$url";
   return imageUrl;
+}
+
+
+int hourConverter(int hour) {
+  if (hour > 12) {
+    hour -= 12;
+  }
+  if (hour == 0) {
+    hour = 12;
+  }
+  return hour;
 }

@@ -12,6 +12,7 @@ part 'teacher_course_bloc.freezed.dart';
 class TeacherCourseBloc extends Bloc<TeacherCourseEvent, TeacherCourseState> {
   CourseTeachersRepository courseTeachersRepository =
       CourseTeachersRepository();
+
   TeacherCourseBloc() : super(TeacherCourseState.initial()) {
     on<TeacherCoursesLoaded>((event, emit) async {
       Response response =

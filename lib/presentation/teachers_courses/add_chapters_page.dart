@@ -49,7 +49,7 @@ class AddNewChapterPage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   sbh10,
-                  textWhite('Please enter your course details'),
+                  const Text('Please enter your course details'),
                   sbh30,
                   InputField(
                     label: "video",
@@ -145,7 +145,7 @@ class AddNewChapterPage extends StatelessWidget {
                           ),
                           child: state.isLoading
                               ? const CircularProgressIndicator()
-                              : textWhite('Add Course'),
+                              : const Text('Add Course'),
                         ),
                       );
                     },

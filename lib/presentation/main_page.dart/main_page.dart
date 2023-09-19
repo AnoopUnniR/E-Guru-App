@@ -1,3 +1,4 @@
+import 'package:eguru_app/application/course_page/course_page_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
@@ -10,6 +11,7 @@ import 'package:eguru_app/presentation/profile_page/profile_page.dart';
 import 'package:eguru_app/presentation/profile_page/teacher_profile.dart';
 import 'package:eguru_app/presentation/search_page/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenMainPage extends StatelessWidget {
   const ScreenMainPage({super.key});
@@ -73,6 +75,20 @@ class ScreenMainPage extends StatelessWidget {
                       titles[index],
                       style: const TextStyle(color: Colors.white, fontSize: 30),
                     ),
+                    actions: index == 0
+                        ? [
+                            IconButton(
+                              onPressed: () {
+                                BlocProvider.of<CoursePageBloc>(context)
+                                    .add(const CourseEventStarted());
+                              },
+                              icon: const Icon(
+                                Icons.refresh,
+                                color: Colors.white,
+                              ),
+                            )
+                          ]
+                        : null,
                   ),
             drawer: DrawerContainerWidget(args: args, isTeacher: isTeacher),
             bottomNavigationBar: const BottomNavigationWidget(),

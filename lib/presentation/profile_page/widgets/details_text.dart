@@ -11,9 +11,9 @@ class TextDetailsWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        textWhite(head),
+        Text(head),
         sbw10,
-        textWhite(":"),
+        const Text(":"),
         sbw10,
         Text(
           data,

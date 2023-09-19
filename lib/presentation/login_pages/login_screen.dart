@@ -3,6 +3,7 @@ import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/infrastructure/login/login_implementation.dart';
 import 'package:eguru_app/infrastructure/user_data/get_user_data.dart';
 import 'package:eguru_app/presentation/admin_pages/admin_home_page.dart';
+import 'package:eguru_app/presentation/login_pages/widgets/login_button.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
@@ -83,8 +84,8 @@ class LoginScreen extends StatelessWidget {
                                   color: Colors.white, fontSize: 20),
                             ),
                             sbh10,
-                            textWhite('please Login into your existing'),
-                            textWhite("account"),
+                            const Text('please Login into your existing'),
+                            const Text("account"),
                             const SizedBox(
                               height: 120,
                             ),
@@ -122,7 +123,7 @@ class LoginScreen extends StatelessWidget {
   ) {
     return SizedBox(
       child: Column(children: [
-        textWhite('Forgot your password?'),
+        const Text('Forgot your password?'),
         TextButton(
           style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
@@ -137,7 +138,7 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
         sbh20,
-        textWhite('New User?'),
+        const Text('New User?'),
         TextButton(
           style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
@@ -158,49 +159,3 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    super.key,
-    required this.width,
-    required this.emailController,
-    required this.passwordController,
-  });
-
-  final double width;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width * 70,
-      child: BlocBuilder<LoginBloc, LoginState>(
-        builder: (context, state) {
-          return ElevatedButton(
-            onPressed: () async {
-              if (emailController.text.isNotEmpty ||
-                  passwordController.text.trim().isNotEmpty) {
-                BlocProvider.of<LoginBloc>(context).add(
-                  LoginRequestedEvent(
-                    email: emailController.text.trim(),
-                    password: passwordController.text.trim(),
-                  ),
-                );
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 233, 9, 210),
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50.0),
-              ),
-            ),
-            child: state is! LoginLoadingState
-                ? textWhite('Login')
-                : const CircularProgressIndicator(),
-          );
-        },
-      ),
-    );
-  }
-}

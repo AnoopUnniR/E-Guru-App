@@ -1,6 +1,5 @@
 
 
-import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/courses_page/course_details/course_details_page.dart';
 import 'package:eguru_app/presentation/login_pages/login_screen.dart';
 import 'package:eguru_app/presentation/login_pages/otp_verification/otp_verify_page.dart';
@@ -98,9 +97,9 @@ class ScreenRouting {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
+          builder: (_) =>const Scaffold(
             body: Center(
-              child: textWhite("No route defined for the name"),
+              child: Text("No route defined for the name"),
             ),
           ),
         );

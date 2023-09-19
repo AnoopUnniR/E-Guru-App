@@ -1,6 +1,5 @@
 
 
-import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +32,7 @@ class AddNewChapterButton extends StatelessWidget {
         ),
         child:
             //  const CircularProgressIndicator()
-            textWhite('Add New Chapter'),
+            const Text('Add New Chapter'),
       ),
     );
   }

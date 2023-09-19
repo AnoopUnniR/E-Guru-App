@@ -34,7 +34,6 @@ class ApplyFormButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("$resume is resume");
     return BlocProvider(
       create: (context) => TeacherRegistrationBloc(),
       child: BlocConsumer<TeacherRegistrationBloc, TeacherRegistrationState>(
@@ -97,7 +96,7 @@ class ApplyFormButton extends StatelessWidget {
               ),
               child: (state is TeacherRegistrationLoading)
                   ? const CircularProgressIndicator()
-                  : textWhite('Apply Form'),
+                  : const Text('Apply Form'),
             ),
           );
         },

@@ -38,15 +38,14 @@ val() async {
   channel.stream.listen(
     (message) {
       // Handle incoming messages
-      print('Received: $message');
     },
     onError: (error) {
       // Handle WebSocket errors
-      print('WebSocket Error: $error');
     },
     onDone: () {
       // WebSocket connection closed
-      print('WebSocket Closed');
     },
   );
 }
+
+
