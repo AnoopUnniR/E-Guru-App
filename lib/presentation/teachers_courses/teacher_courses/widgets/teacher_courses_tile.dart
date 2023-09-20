@@ -158,12 +158,22 @@ class TeachersCoursesTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 233, 9, 210),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.pushNamed(context, addNewCoursePageRoute,
                               arguments: course);
                         },
                         child: const Text("Edit")),
                     ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 233, 9, 210),
+                          ),
+                        ),
                         onPressed: () {
                           showDialog(
                             context: context,

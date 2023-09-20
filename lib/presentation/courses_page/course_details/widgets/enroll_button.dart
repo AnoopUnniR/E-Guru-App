@@ -1,9 +1,7 @@
-
 import 'package:eguru_app/application/course_details/course_details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
-
 
 class EnrollButtonWidget extends StatelessWidget {
   const EnrollButtonWidget(
@@ -32,10 +30,16 @@ class EnrollButtonWidget extends StatelessWidget {
               context: context,
               builder: (context) => AlertDialog(
                 backgroundColor: Colors.blue[400],
+                title: const Text("Unenroll?"),
                 content:
                     const Text("Do you wish to unenroll from this course?"),
                 actions: [
                   ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(255, 233, 9, 210),
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                         BlocProvider.of<CourseDetailsBloc>(context)
@@ -43,6 +47,11 @@ class EnrollButtonWidget extends StatelessWidget {
                       },
                       child: const Text("Confirm")),
                   ElevatedButton(
+                      style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(255, 233, 9, 210),
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -62,8 +71,8 @@ class EnrollButtonWidget extends StatelessWidget {
         child: state.isLoading
             ? const CircularProgressIndicator()
             : state.isEnrolled
-                ? const Text("Unenroll",style: TextStyle(color: Colors.white))
-                : const Text("Enroll",style: TextStyle(color: Colors.white)),
+                ? const Text("Unenroll", style: TextStyle(color: Colors.white))
+                : const Text("Enroll", style: TextStyle(color: Colors.white)),
       ),
     );
   }

@@ -1,4 +1,4 @@
-package com.example.eguru_app
+package com.eguru.eguru_app
 
 import io.flutter.embedding.android.FlutterActivity
 

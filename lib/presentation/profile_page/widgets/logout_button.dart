@@ -1,9 +1,6 @@
-
-
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
 import 'package:eguru_app/infrastructure/shared_prefernce/token_handler.dart';
-
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({
@@ -25,12 +22,22 @@ class LogOutButton extends StatelessWidget {
                 style: TextStyle(color: Colors.black)),
             actions: [
               ElevatedButton(
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Color.fromARGB(255, 233, 9, 210),
+                  ),
+                ),
                 child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               ElevatedButton(
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Color.fromARGB(255, 233, 9, 210),
+                  ),
+                ),
                 child: const Text('Logout'),
                 onPressed: () {
                   SaveToken.deleteToken();

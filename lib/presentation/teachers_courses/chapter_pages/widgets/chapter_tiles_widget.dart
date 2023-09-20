@@ -64,11 +64,19 @@ class ChapterTilesWidget extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
+                    title: const Text("Delete Chapter?"),
                     backgroundColor: Colors.blue,
                     content: Text(
-                        "Do you want to delete the chapter \"${chapter.title}\""),
+                      "Do you want to delete the chapter \"${chapter.title}\"",
+                      style: const TextStyle(color: Colors.black),
+                    ),
                     actions: [
                       ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 233, 9, 210),
+                          ),
+                        ),
                         onPressed: () {
                           if (isAdmin) {
                             BlocProvider.of<AdminChaptersListBloc>(context).add(
@@ -86,6 +94,11 @@ class ChapterTilesWidget extends StatelessWidget {
                         child: const Text("Delete"),
                       ),
                       ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 233, 9, 210),
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.pop(context);
                         },

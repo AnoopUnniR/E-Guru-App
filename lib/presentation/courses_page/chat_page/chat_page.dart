@@ -47,10 +47,19 @@ class ChatPage extends StatelessWidget {
             ),
           ),
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
-            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            title: Text(
+              roomName,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+            backgroundColor: Colors.black,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();
                 Navigator.pop(context);
@@ -186,5 +195,3 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
-
-

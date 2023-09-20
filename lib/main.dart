@@ -95,6 +95,10 @@ class MainApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: Colors.white),
           ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                  textStyle: const TextStyle(color: Colors.white),),),
         ),
         onGenerateRoute: ScreenRouting.generateRoute,
         initialRoute: splashScreenRoute,

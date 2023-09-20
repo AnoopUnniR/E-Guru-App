@@ -1,9 +1,9 @@
 import 'package:appwrite/appwrite.dart';
 
-const String appwriteDbID = "65092d9d9b9e8fbfaa52";
-const String appwriteId = '65091e6dd5a1988f0dc0';
+const String appwriteDbID = "650a886569bde420202b";
+const String appwriteId = '650a880b05740ce03218';
 const String appwriteKey =
-    "7ee4d9fb10d5790cbf1c9743ad5fd298b99fc1fd4499a3029407c1fa9bcb20008565a8f84a6f6aca76def5705dfc4a5836277533df28b8f3a59554d168d2ca3585d742ae0b7fa03812ee0e6e5ce0be90ed28474b96834f818ee33d9744033fa72bd9a3fbfcc6678994e5227f297abc8b664d079f5e912dc7644da02ff955f5df";
+    "a935289bb040cd4743a02d7b1043bf5f75b2494a99246402e3e2e4258cd4733b728df2d70a798de945d3a247c75dda4c59dd8eb8c78c9678fba1772dd7b2a0688de2437fb613ec1c2a766b1a7c00450e91a1ad3484c015f99b0ffd23be548bee678b9bc666c3257c812cc8957ad194241c27d0d8aa019da89668b7b6456212d8";
 
 class AppwriteRepository {
   Client client = Client();

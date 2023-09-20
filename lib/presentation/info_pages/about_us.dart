@@ -1,7 +1,5 @@
-
 import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
-
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -17,7 +15,7 @@ class AboutUsPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           title: const Text(
             "About Us",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: Colors.white),
           ),
         ),
         body: ListView(
@@ -44,6 +42,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             SizedBox(height: 8.0),
             ListTile(
+              textColor: Colors.white,
               leading: Icon(
                 Icons.school,
                 color: Colors.white,
@@ -53,18 +52,21 @@ class AboutUsPage extends StatelessWidget {
                   'Access a vast library of free courses in various fields.'),
             ),
             ListTile(
+              textColor: Colors.white,
               leading: Icon(Icons.star, color: Colors.white),
               title: Text('Quality Content'),
               subtitle: Text(
                   'Learn from experts and educators in their respective fields.'),
             ),
             ListTile(
+              textColor: Colors.white,
               leading: Icon(Icons.language, color: Colors.white),
               title: Text('Wide Range of Subjects'),
               subtitle: Text(
                   'Explore subjects ranging from science and technology to arts and humanities.'),
             ),
             ListTile(
+              textColor: Colors.white,
               leading: Icon(Icons.access_time, color: Colors.white),
               title: Text('Flexible Learning'),
               subtitle: Text('Learn at your own pace, anytime and anywhere.'),

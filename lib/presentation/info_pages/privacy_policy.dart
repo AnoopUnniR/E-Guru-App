@@ -1,7 +1,5 @@
-
 import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
-
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -17,7 +15,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           elevation: 0,
           title: const Text(
             "Privacy Policy",
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 30, color: Colors.white),
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -48,7 +46,7 @@ class PrivacyPolicyPage extends StatelessWidget {
               'Welcome to E-Guru! This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our mobile application (the "App"). We are committed to safeguarding your privacy and ensuring transparency in our data practices.',
               style: TextStyle(),
             ),
-            // Include the rest of your Privacy Policy content here as Text widgets.
+            // 
           ],
         ),
       ),

@@ -1,9 +1,6 @@
 import 'package:eguru_app/domain/api_endpoints.dart';
 import 'package:flutter/material.dart';
 
-const profileImage =
-    "https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg";
-
 // Widget textWhite(String text) => Text(
 //       text,
 //       style: const TextStyle(color: Colors.white),

@@ -28,9 +28,9 @@ class ReviewTile extends StatelessWidget {
                 constraints: const BoxConstraints(maxHeight: 30, maxWidth: 30),
                 height: width * 10,
                 width: width * 10,
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(profileImage),
+                    image: NetworkImage(imageUrlConvert(review.userImage)),
                   ),
                 ),
               ),

@@ -1,5 +1,3 @@
-
-
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
@@ -40,7 +38,6 @@ class DrawerContainerWidget extends StatelessWidget {
           ),
         ),
         child: Drawer(
-          
           backgroundColor: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,12 +167,22 @@ class DrawerContainerWidget extends StatelessWidget {
                             ),
                             actions: [
                               ElevatedButton(
+                                style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Color.fromARGB(255, 233, 9, 210),
+                                  ),
+                                ),
                                 onPressed: () async {
-                                   await Restart.restartApp();
+                                  await Restart.restartApp();
                                 },
                                 child: const Text("Confirm"),
                               ),
                               ElevatedButton(
+                                style: const ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Color.fromARGB(255, 233, 9, 210),
+                                  ),
+                                ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
