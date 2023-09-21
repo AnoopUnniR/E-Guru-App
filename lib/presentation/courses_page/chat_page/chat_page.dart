@@ -66,110 +66,110 @@ class ChatPage extends StatelessWidget {
               },
             ),
           ),
-          body: BlocConsumer<ChatBlocBloc, ChatBlocState>(
-            listener: (context, state) async {
-              if (state.chats.isEmpty) return;
-              if (state is Started || state is Reload) {
-                if (state is Started) {
-                  await Future.delayed(const Duration(milliseconds: 500));
+          body: SafeArea(
+            child: BlocConsumer<ChatBlocBloc, ChatBlocState>(
+              listener: (context, state) async {
+                if (state.chats.isEmpty) return;
+                if (state is Started || state is Reload) {
+                  if (state.isLoading) {
+                    await Future.delayed(const Duration(milliseconds: 500));
+                  }
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    scrollController.animateTo(
+                        scrollController.position.maxScrollExtent,
+                        duration: const Duration(microseconds: 1000),
+                        curve: Curves.easeIn);
+                  });
                 }
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  scrollController.animateTo(
-                      scrollController.position.maxScrollExtent,
-                      duration: const Duration(microseconds: 1000),
-                      curve: Curves.easeIn);
-                });
-              }
-              if (state is Reload) {
-                await Future.delayed(const Duration(milliseconds: 500));
-                scrollController.animateTo(
-                    scrollController.position.maxScrollExtent,
-                    duration: const Duration(microseconds: 1000),
-                    curve: Curves.easeIn);
-              }
-            },
-            builder: (context, state) {
-              if (state.isLoading) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              String name1 = '';
-              String date = '';
-              if (state.chats.isNotEmpty) {
-                DateTime dateTime = DateTime.parse(state.chats[0].dateTime);
-                date =
-                    "${dateTime.day.toString()}/${dateTime.month.toString()}/${dateTime.year.toString()}";
-              }
-              // bool isSameSender = false;
-              return SafeArea(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: state.chats.isEmpty
-                          ? const Center(
-                              child: Text(
-                                "no chats yet",
-                                style: TextStyle(color: Colors.black),
+                // if (state is Reload) {
+                //   await Future.delayed(const Duration(milliseconds: 500));
+                //   scrollController.animateTo(
+                //       scrollController.position.maxScrollExtent,
+                //       duration: const Duration(microseconds: 1000),
+                //       curve: Curves.easeIn);
+                // }
+              },
+              buildWhen: (previous, current) => true,
+              builder: (context, state) {
+                if (state.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                String date = '';
+                if (state.chats.isNotEmpty) {
+                  DateTime dateTime = DateTime.parse(state.chats[0].dateTime);
+                  date =
+                      "${dateTime.day.toString()}/${dateTime.month.toString()}/${dateTime.year.toString()}";
+                }
+                // bool isSameSender = false;
+                return SizedBox(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: state.chats.isEmpty
+                            ? const Center(
+                                child: Text(
+                                  "no chats yet",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              )
+                            : ListView.separated(
+                                separatorBuilder: (context, index) {
+                                  Chat chat = state.chats[index];
+                                  DateTime dateTime =
+                                      DateTime.parse(chat.dateTime);
+                                  String chatDate =
+                                      "${dateTime.day.toString()}/${dateTime.month.toString()}/${dateTime.year.toString()}";
+                                  if (date == chatDate) {
+                                    return const SizedBox();
+                                  }
+                                  date = chatDate;
+                                  return dateWidget(width, date);
+                                },
+                                controller: scrollController,
+                                padding: const EdgeInsets.all(5),
+                                shrinkWrap: true,
+                                itemCount: state.chats.length,
+                                itemBuilder: (context, index) {
+                                  Chat chat = state.chats[index];
+                                  bool isSender =
+                                      chat.senderId == savedUserId.toString();
+                                  DateTime dateTime =
+                                      DateTime.parse(chat.dateTime);
+                                  int hour = hourConverter(dateTime.hour);
+                                  String period = (hour < 12) ? 'AM' : 'PM';
+                                  String time =
+                                      "$hour:${dateTime.minute}:${dateTime.second} $period";
+                                  return ChatBubble(
+                                    isSender: isSender,
+                                    chat: chat,
+                                    width: width,
+                                    time: time,
+                                  );
+                                },
                               ),
-                            )
-                          : ListView.separated(
-                              separatorBuilder: (context, index) {
-                                Chat chat = state.chats[index];
-                                DateTime dateTime =
-                                    DateTime.parse(chat.dateTime);
-                                String chatDate =
-                                    "${dateTime.day.toString()}/${dateTime.month.toString()}/${dateTime.year.toString()}";
-                                if (date == chatDate) {
-                                  return const SizedBox();
-                                }
-                                date = chatDate;
-                                return SizedBox(
-                                  height: 20,
-                                  width: width * 100,
-                                  child: Center(
-                                    child: Text(
-                                      date,
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              controller: scrollController,
-                              padding: const EdgeInsets.all(5),
-                              shrinkWrap: true,
-                              itemCount: state.chats.length,
-                              itemBuilder: (context, index) {
-                                Chat chat = state.chats[index];
-                                if (chat.senderName != name1) {
-                                  name1 = chat.senderName;
-                                  // isSameSender = false;
-                                } else {
-                                  // isSameSender = true;
-                                }
-                                bool isSender =
-                                    chat.senderId == savedUserId.toString();
-                                DateTime dateTime =
-                                    DateTime.parse(chat.dateTime);
-                                int hour = hourConverter(dateTime.hour);
-                                String period = (hour < 12) ? 'AM' : 'PM';
-                                String time =
-                                    "$hour:${dateTime.minute}:${dateTime.second} $period";
-                                return ChatBubble(
-                                  isSender: isSender,
-                                  chat: chat,
-                                  width: width,
-                                  time: time,
-                                );
-                              },
-                            ),
-                    ),
-                    ChatBoxTextInputWidget(
-                        width: width, messageController: messageController)
-                  ],
-                ),
-              );
-            },
+                      ),
+                      ChatBoxTextInputWidget(
+                          width: width, messageController: messageController)
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox dateWidget(double width, String date) {
+    return SizedBox(
+      height: 20,
+      width: width * 100,
+      child: Center(
+        child: Text(
+          date,
+          style: const TextStyle(
+            color: Colors.black,
           ),
         ),
       ),

@@ -5,18 +5,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'chat_bloc_event.dart';
 part 'chat_bloc_state.dart';
 part 'chat_bloc_bloc.freezed.dart';
 
 class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
-
-
   AppwriteChatRepository appwriteChatRepository;
   late RealtimeSubscription subscription;
   // List<ChatModel> chats = [];
   List<Chat> chats = [];
+
   ChatBlocBloc(this.appwriteChatRepository, this.subscription)
       : super(ChatBlocState.initial()) {
     subscription.stream.listen((chat) {
@@ -29,7 +27,7 @@ class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
       emit(state.copyWith(isLoading: true));
       final response = await appwriteChatRepository.getAllChats();
       final states = response.fold((left) {
-        return state.copyWith(isError: true);
+        return state.copyWith();
       }, (right) {
         chats.addAll(right);
         return state.copyWith(
@@ -41,10 +39,11 @@ class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
     });
     on<Send>((event, emit) async {
       await appwriteChatRepository.sendMessage(event.message);
-      add(const Update());
+      // add(const Update());
     });
     on<Update>((event, emit) {
-      emit(Reload(chats: chats, isLoading: false, isError: false));
+      
+      emit(Reload(chats: chats, isLoading: false, num: chats.length));
     });
     //[when using websocket]
 

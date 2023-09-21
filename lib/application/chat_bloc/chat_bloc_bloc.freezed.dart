@@ -500,25 +500,23 @@ mixin _$ChatBlocState {
 // required List<ChatModel> chats,
   List<Chat> get chats => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get isError => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
-        reload,
+    required TResult Function(List<Chat> chats, bool isLoading, int num) reload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult? Function(List<Chat> chats, bool isLoading, int num)? reload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult Function(List<Chat> chats, bool isLoading, int num)? reload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -553,7 +551,7 @@ abstract class $ChatBlocStateCopyWith<$Res> {
           ChatBlocState value, $Res Function(ChatBlocState) then) =
       _$ChatBlocStateCopyWithImpl<$Res, ChatBlocState>;
   @useResult
-  $Res call({List<Chat> chats, bool isLoading, bool isError});
+  $Res call({List<Chat> chats, bool isLoading});
 }
 
 /// @nodoc
@@ -571,7 +569,6 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
   $Res call({
     Object? chats = null,
     Object? isLoading = null,
-    Object? isError = null,
   }) {
     return _then(_value.copyWith(
       chats: null == chats
@@ -581,10 +578,6 @@ class _$ChatBlocStateCopyWithImpl<$Res, $Val extends ChatBlocState>
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -696,8 +689,7 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
-        reload,
+    required TResult Function(List<Chat> chats, bool isLoading, int num) reload,
   }) {
     return started(chats, isLoading, isError);
   }
@@ -706,7 +698,7 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult? Function(List<Chat> chats, bool isLoading, int num)? reload,
   }) {
     return started?.call(chats, isLoading, isError);
   }
@@ -715,7 +707,7 @@ class _$Started with DiagnosticableTreeMixin implements Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult Function(List<Chat> chats, bool isLoading, int num)? reload,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -766,7 +758,6 @@ abstract class Started implements ChatBlocState {
   List<Chat> get chats;
   @override
   bool get isLoading;
-  @override
   bool get isError;
   @override
   @JsonKey(ignore: true)
@@ -780,7 +771,7 @@ abstract class _$$ReloadCopyWith<$Res> implements $ChatBlocStateCopyWith<$Res> {
       __$$ReloadCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Chat> chats, bool isLoading, bool isError});
+  $Res call({List<Chat> chats, bool isLoading, int num});
 }
 
 /// @nodoc
@@ -795,7 +786,7 @@ class __$$ReloadCopyWithImpl<$Res>
   $Res call({
     Object? chats = null,
     Object? isLoading = null,
-    Object? isError = null,
+    Object? num = null,
   }) {
     return _then(_$Reload(
       chats: null == chats
@@ -806,10 +797,10 @@ class __$$ReloadCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
+      num: null == num
+          ? _value.num
+          : num // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -820,7 +811,7 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   const _$Reload(
       {required final List<Chat> chats,
       required this.isLoading,
-      required this.isError})
+      required this.num})
       : _chats = chats;
 
   final List<Chat> _chats;
@@ -834,11 +825,11 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   @override
   final bool isLoading;
   @override
-  final bool isError;
+  final int num;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChatBlocState.reload(chats: $chats, isLoading: $isLoading, isError: $isError)';
+    return 'ChatBlocState.reload(chats: $chats, isLoading: $isLoading, num: $num)';
   }
 
   @override
@@ -848,7 +839,7 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
       ..add(DiagnosticsProperty('type', 'ChatBlocState.reload'))
       ..add(DiagnosticsProperty('chats', chats))
       ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('isError', isError));
+      ..add(DiagnosticsProperty('num', num));
   }
 
   @override
@@ -859,12 +850,12 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
             const DeepCollectionEquality().equals(other._chats, _chats) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError));
+            (identical(other.num, num) || other.num == num));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_chats), isLoading, isError);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_chats), isLoading, num);
 
   @JsonKey(ignore: true)
   @override
@@ -877,30 +868,29 @@ class _$Reload with DiagnosticableTreeMixin implements Reload {
   TResult when<TResult extends Object?>({
     required TResult Function(List<Chat> chats, bool isLoading, bool isError)
         started,
-    required TResult Function(List<Chat> chats, bool isLoading, bool isError)
-        reload,
+    required TResult Function(List<Chat> chats, bool isLoading, int num) reload,
   }) {
-    return reload(chats, isLoading, isError);
+    return reload(chats, isLoading, num);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult? Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult? Function(List<Chat> chats, bool isLoading, int num)? reload,
   }) {
-    return reload?.call(chats, isLoading, isError);
+    return reload?.call(chats, isLoading, num);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<Chat> chats, bool isLoading, bool isError)? started,
-    TResult Function(List<Chat> chats, bool isLoading, bool isError)? reload,
+    TResult Function(List<Chat> chats, bool isLoading, int num)? reload,
     required TResult orElse(),
   }) {
     if (reload != null) {
-      return reload(chats, isLoading, isError);
+      return reload(chats, isLoading, num);
     }
     return orElse();
   }
@@ -941,14 +931,13 @@ abstract class Reload implements ChatBlocState {
   const factory Reload(
       {required final List<Chat> chats,
       required final bool isLoading,
-      required final bool isError}) = _$Reload;
+      required final int num}) = _$Reload;
 
   @override
   List<Chat> get chats;
   @override
   bool get isLoading;
-  @override
-  bool get isError;
+  int get num;
   @override
   @JsonKey(ignore: true)
   _$$ReloadCopyWith<_$Reload> get copyWith =>

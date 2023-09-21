@@ -15,6 +15,6 @@ class ChatBlocState with _$ChatBlocState {
         const factory ChatBlocState.reload({
     required List<Chat> chats,
     required bool isLoading,
-    required bool isError,
+    required int num,
   }) = Reload;
 }
