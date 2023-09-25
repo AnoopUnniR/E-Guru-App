@@ -47,71 +47,108 @@ class AddedCoursesPage extends StatelessWidget {
                   SizedBox(
                     height: height * 80,
                     child: state.course.isEmpty
-                        ? const Center(child: Text("No Courses Added"))
-                        : width < 10
-                            ? ListView.builder(
-                                itemCount: state.course.length,
-                                itemBuilder: (context, index) {
-                                  CourseResponseModel course =
-                                      state.course[index];
-                                  String imageUrl =
-                                      imageUrlConvert(course.image);
-                                  return InkWell(
-                                    onTap: () {
-                                      BlocProvider.of<TeacherCourseChaperBloc>(
-                                              context)
-                                          .add(
-                                        TeacherCourseChaperEvent.started(
-                                          course.id,
-                                        ),
-                                      );
-                                      Navigator.pushNamed(
-                                          context, teacherChaptersPageRoute,
-                                          arguments: course.id);
-                                    },
-                                    child: TeachersCoursesTile(
-                                      width: width,
-                                      imageUrl: imageUrl,
-                                      course: course,
-                                      teacherModel: teacherModel,
+                        ? const Center(child: Text("No Courses Added",),)
+                        : GridView.builder(
+                            itemCount: state.course.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    childAspectRatio: width > 10
+                                        ? (width * 100) / 520
+                                        : ((width * 100) / 260),
+                                    crossAxisCount: width > 10 ? 2 : 1),
+                            itemBuilder: (context, index) {
+                              CourseResponseModel course = state.course[index];
+                              String imageUrl =
+                                  "$baseUrl${course.image.split('8000/').last}";
+                              return InkWell(
+                                onTap: () {
+                                  BlocProvider.of<TeacherCourseChaperBloc>(
+                                          context)
+                                      .add(
+                                    TeacherCourseChaperEvent.started(
+                                      course.id,
                                     ),
                                   );
-                                },
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.all(16),
-                              )
-                            : GridView.builder(
-                                itemCount: state.course.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: (width * 100) / 600),
-                                itemBuilder: (context, index) {
-                                  CourseResponseModel course =
-                                      state.course[index];
-                                  String imageUrl =
-                                      "$baseUrl${course.image.split('8000/').last}";
-                                  return InkWell(
-                                    onTap: () {
-                                      BlocProvider.of<TeacherCourseChaperBloc>(
-                                              context)
-                                          .add(TeacherCourseChaperEvent.started(
-                                              course.id));
-                                      Navigator.pushNamed(
-                                          context, teacherChaptersPageRoute,
-                                          arguments: course.id);
-                                    },
-                                    child: TeachersCoursesTile(
-                                      width: width,
-                                      imageUrl: imageUrl,
-                                      course: course,
-                                      teacherModel: teacherModel,
-                                    ),
+                                  Navigator.pushNamed(
+                                    context,
+                                    teacherChaptersPageRoute,
+                                    arguments: course.id,
                                   );
                                 },
-                              ),
+                                child: TeachersCoursesTile(
+                                  width: width,
+                                  imageUrl: imageUrl,
+                                  course: course,
+                                  teacherModel: teacherModel,
+                                ),
+                              );
+                            },
+                          ),
+                    //       : width < 10
+                    //           ? ListView.builder(
+                    //               itemCount: state.course.length,
+                    //               itemBuilder: (context, index) {
+                    //                 CourseResponseModel course =
+                    //                     state.course[index];
+                    //                 String imageUrl =
+                    //                     imageUrlConvert(course.image);
+                    //                 return InkWell(
+                    //                   onTap: () {
+                    //                     BlocProvider.of<TeacherCourseChaperBloc>(
+                    //                             context)
+                    //                         .add(
+                    //                       TeacherCourseChaperEvent.started(
+                    //                         course.id,
+                    //                       ),
+                    //                     );
+                    //                     Navigator.pushNamed(
+                    //                         context, teacherChaptersPageRoute,
+                    //                         arguments: course.id);
+                    //                   },
+                    //                   child: TeachersCoursesTile(
+                    //                     width: width,
+                    //                     imageUrl: imageUrl,
+                    //                     course: course,
+                    //                     teacherModel: teacherModel,
+                    //                   ),
+                    //                 );
+                    //               },
+                    //               shrinkWrap: true,
+                    //               padding: const EdgeInsets.all(16),
+                    //             )
+                    //           : GridView.builder(
+                    //               itemCount: state.course.length,
+                    //               gridDelegate:
+                    //                   SliverGridDelegateWithFixedCrossAxisCount(
+                    //                       crossAxisCount: 2,
+                    //                       childAspectRatio: (width * 100) / 600),
+                    //               itemBuilder: (context, index) {
+                    //                 CourseResponseModel course =
+                    //                     state.course[index];
+                    //                 String imageUrl =
+                    //                     "$baseUrl${course.image.split('8000/').last}";
+                    //                 return InkWell(
+                    //                   onTap: () {
+                    //                     BlocProvider.of<TeacherCourseChaperBloc>(
+                    //                             context)
+                    //                         .add(TeacherCourseChaperEvent.started(
+                    //                             course.id));
+                    //                     Navigator.pushNamed(
+                    //                         context, teacherChaptersPageRoute,
+                    //                         arguments: course.id);
+                    //                   },
+                    //                   child: TeachersCoursesTile(
+                    //                     width: width,
+                    //                     imageUrl: imageUrl,
+                    //                     course: course,
+                    //                     teacherModel: teacherModel,
+                    //                   ),
+                    //                 );
+                    //               },
+                    //             ),
                   ),
-                  SizedBox(
+                  Container(
+                    constraints:const BoxConstraints(maxWidth: 400),
                     width: width * 70,
                     child: ElevatedButton(
                       onPressed: () {

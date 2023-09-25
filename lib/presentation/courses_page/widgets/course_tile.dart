@@ -65,7 +65,8 @@ class CourseCard extends StatelessWidget {
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 25,
-                                    overflow: TextOverflow.ellipsis),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                               ),
                             ),
                             sbh10,

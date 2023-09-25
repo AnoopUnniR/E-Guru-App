@@ -20,14 +20,14 @@ import 'package:image_picker/image_picker.dart';
 // ignore: must_be_immutable
 class AddNewCoursesPage extends StatelessWidget {
   AddNewCoursesPage({super.key});
-  final TextEditingController titleCotroller = TextEditingController();
-  final TextEditingController descriptionCotroller = TextEditingController();
-  final TextEditingController durationCotroller = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController durationController = TextEditingController();
   final TextEditingController levelController = TextEditingController();
   CourseResponseModel? courseModel;
   CategoryModel? categoryModel;
   bool isEdit = false;
-  ValueNotifier<XFile?> imagevalueNotifier = ValueNotifier(null);
+  ValueNotifier<XFile?> imageValueNotifier = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,9 @@ class AddNewCoursesPage extends StatelessWidget {
     }
     if (modelData is CourseResponseModel && !isEdit) {
       courseModel = modelData;
-      titleCotroller.text = courseModel!.title;
-      descriptionCotroller.text = courseModel!.desc;
-      durationCotroller.text = courseModel!.duration;
+      titleController.text = courseModel!.title;
+      descriptionController.text = courseModel!.desc;
+      durationController.text = courseModel!.duration;
       levelController.text = courseModel!.level;
       isEdit = true;
     }
@@ -49,7 +49,7 @@ class AddNewCoursesPage extends StatelessWidget {
     }
 
     void handleTap(AddNewCourseBloc addNewCourseBloc) async {
-      imagevalueNotifier.value = await PickImage.pickImage();
+      imageValueNotifier.value = await PickImage.pickImage();
       addNewCourseBloc.add(const AddNewCourseEvent.courseAdded(null));
     }
 
@@ -87,7 +87,7 @@ class AddNewCoursesPage extends StatelessWidget {
                           handleTap(BlocProvider.of<AddNewCourseBloc>(context));
                         },
                         child: ValueListenableBuilder(
-                          valueListenable: imagevalueNotifier,
+                          valueListenable: imageValueNotifier,
                           builder: (context, value, child) {
                             return SizedBox(
                               width: 200,
@@ -130,7 +130,7 @@ class AddNewCoursesPage extends StatelessWidget {
                   sbh20,
                   InputField(
                     label: "Title",
-                    controller: titleCotroller,
+                    controller: titleController,
                     keyboardType: TextInputType.name,
                   ),
                   sbh20,
@@ -141,14 +141,14 @@ class AddNewCoursesPage extends StatelessWidget {
                   sbh20,
                   InputField(
                     label: "Description",
-                    controller: descriptionCotroller,
+                    controller: descriptionController,
                     keyboardType: TextInputType.name,
                     maxLines: null,
                   ),
                   sbh20,
                   InputField(
                     label: "Duration",
-                    controller: durationCotroller,
+                    controller: durationController,
                     keyboardType: TextInputType.datetime,
                   ),
                   sbh40,
@@ -181,25 +181,25 @@ class AddNewCoursesPage extends StatelessWidget {
                         return isEdit
                             ? ElevatedButton(
                                 onPressed: () async {
-                                  if (imagevalueNotifier.value == null ||
-                                      titleCotroller.text.trim().isEmpty ||
+                                  if (imageValueNotifier.value == null ||
+                                      titleController.text.trim().isEmpty ||
                                       levelController.text.trim().isEmpty ||
-                                      descriptionCotroller.text
+                                      descriptionController.text
                                           .trim()
                                           .isEmpty ||
-                                      durationCotroller.text.trim().isEmpty) {
+                                      durationController.text.trim().isEmpty) {
                                     showCustomSnackbar(
                                         message: "Please Fill All The Fields",
                                         context: context);
                                   }
                                   if (courseModel != null) {
-                                    if (titleCotroller.text ==
+                                    if (titleController.text ==
                                             courseModel!.title &&
                                         levelController.text ==
                                             courseModel!.level &&
-                                        descriptionCotroller.text ==
+                                        descriptionController.text ==
                                             courseModel!.desc &&
-                                        durationCotroller.text ==
+                                        durationController.text ==
                                             courseModel!.duration) {
                                       showCustomSnackbar(
                                           message:
@@ -210,15 +210,15 @@ class AddNewCoursesPage extends StatelessWidget {
 
                                   NewCourseModel newCourseModel =
                                       NewCourseModel(
-                                          title: titleCotroller.text,
+                                          title: titleController.text,
                                           category: [
                                             categoryModel?.id ??
                                                 courseModel!.category.id
                                           ],
-                                          image: imagevalueNotifier.value!,
+                                          image: imageValueNotifier.value!,
                                           description:
-                                              descriptionCotroller.text,
-                                          duration: durationCotroller.text,
+                                              descriptionController.text,
+                                          duration: durationController.text,
                                           level: levelController.text,
                                           teacher: savedUserId);
                                   BlocProvider.of<AddNewCourseBloc>(context)
@@ -242,31 +242,31 @@ class AddNewCoursesPage extends StatelessWidget {
                             : ElevatedButton(
                                 onPressed: () async {
                                   FocusScope.of(context).unfocus();
-                                  if (imagevalueNotifier.value == null ||
-                                      titleCotroller.text.trim().isEmpty ||
+                                  if (imageValueNotifier.value == null ||
+                                      titleController.text.trim().isEmpty ||
                                       levelController.text.trim().isEmpty ||
-                                      descriptionCotroller.text
+                                      descriptionController.text
                                           .trim()
                                           .isEmpty ||
-                                      durationCotroller.text.trim().isEmpty) {
+                                      durationController.text.trim().isEmpty) {
                                     showCustomSnackbar(
                                         message: "Please Fill All The Fields",
                                         context: context);
                                   }
                                   NewCourseModel newCourseModel =
                                       NewCourseModel(
-                                          title: titleCotroller.text,
+                                          title: titleController.text,
                                           category: [
                                             categoryModel?.id ??
                                                 courseModel!.category.id
                                           ],
                                           image:
-                                              imagevalueNotifier
+                                              imageValueNotifier
                                                       .value ??
                                                   XFile("null"),
                                           description:
-                                              descriptionCotroller.text,
-                                          duration: durationCotroller.text,
+                                              descriptionController.text,
+                                          duration: durationController.text,
                                           level: levelController.text,
                                           teacher: savedUserId);
                                   BlocProvider.of<AddNewCourseBloc>(context)

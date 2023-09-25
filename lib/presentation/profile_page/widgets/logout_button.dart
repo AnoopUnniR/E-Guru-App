@@ -53,7 +53,10 @@ class LogOutButton extends StatelessWidget {
           ),
         );
       },
-      child: const Text("Log Out"),
+      child: const Text(
+        "Log Out",
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

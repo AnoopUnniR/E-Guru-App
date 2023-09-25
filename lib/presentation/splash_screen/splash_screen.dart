@@ -77,24 +77,26 @@ class SplashScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    constraints:
-                        const BoxConstraints(maxWidth: 500, maxHeight: 500),
-                    width: width - 40,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/E-Guru.gif"),
+            return SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      constraints:
+                          const BoxConstraints(maxWidth: 500, maxHeight: 500),
+                      width: width - 40,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/E-Guru.gif"),
+                        ),
                       ),
                     ),
-                  ),
-                  const CircularProgressIndicator(
-                    color: Colors.white,
-                  )
-                ],
+                    const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  ],
+                ),
               ),
             );
           },

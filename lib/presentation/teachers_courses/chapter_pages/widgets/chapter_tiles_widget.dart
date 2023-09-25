@@ -26,7 +26,9 @@ class ChapterTilesWidget extends StatelessWidget {
       color: Colors.transparent,
       elevation: 5,
       child: Container(
-        constraints: const BoxConstraints(maxHeight: 100),
+        constraints: const BoxConstraints(
+          maxHeight: 100,
+        ),
         padding: const EdgeInsets.all(8),
         width: width * 20,
         height: width * 20,
@@ -39,6 +41,7 @@ class ChapterTilesWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
+              constraints:const BoxConstraints(maxWidth: 70),
               width: width * 10,
               height: width * 10,
               decoration: const BoxDecoration(
@@ -50,7 +53,7 @@ class ChapterTilesWidget extends StatelessWidget {
             ),
             sbw20,
             SizedBox(
-              width: width * 55,
+              width: width > 10 ? width * 20 : width * 55,
               child: TextScroll(
                 delayBefore: const Duration(seconds: 3),
                 pauseBetween: const Duration(seconds: 3),

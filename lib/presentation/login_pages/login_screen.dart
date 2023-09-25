@@ -35,8 +35,8 @@ class LoginScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-              child: Center(
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Center(
                   child: BlocConsumer<LoginBloc, LoginState>(
                     listener: (context, state) {
                       if (state is LoginLoading) {
