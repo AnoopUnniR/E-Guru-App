@@ -230,16 +230,17 @@ class TeacherSignupPage extends StatelessWidget {
             leading: const Icon(Icons.photo_album),
             onTap: () async {
               Navigator.pop(context);
-              signupImage.value =
-                  await profileImageFunc.selectImage(ImageSource.gallery);
+              // signupImage.value =
+              //     await profileImageFunc.selectImage(ImageSource.gallery);
+              print("here");
             },
             title: const Text("Select From Gallery"),
           ),
           ListTile(
             onTap: () async {
               Navigator.pop(context);
-              signupImage.value =
-                  await profileImageFunc.selectImage(ImageSource.camera);
+              // signupImage.value =
+              //     await profileImageFunc.selectImage(ImageSource.camera);
             },
             leading: const Icon(Icons.camera_alt),
             title: const Text("Capture Live"),

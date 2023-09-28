@@ -1,9 +1,9 @@
-import 'dart:io';
-
 import 'package:eguru_app/application/signup_bloc/signup_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/create_button.dart';
 import 'package:eguru_app/domain/models/signup_model.dart';
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
+import 'package:eguru_app/presentation/login_pages/signup_page/widget/signup_image_widget.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
@@ -12,29 +12,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final ProfileImage profileImageFunc = ProfileImage();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     CroppedFile? imageFile;
-    double width = MediaQuery.of(context).size.width / 100;
+
     return Container(
       decoration: scaffoldBackgroundDecoration(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formKey,
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: textFieldWidth),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: textFieldWidth),
+                child: Form(
+                  key: formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,39 +61,7 @@ class SignupScreen extends StatelessWidget {
                             if (state is SignupImageLoading) {
                               imageFile = state.image;
                             }
-                            return SizedBox(
-                              height: 200,
-                              width: 200,
-                              child: Stack(
-                                children: [
-                                  imageFile == null
-                                      ? const CircleAvatar(
-                                          radius: 100,
-                                          backgroundImage: AssetImage(
-                                            "assets/profilepic.jpg",
-                                          ),
-                                        )
-                                      : CircleAvatar(
-                                          radius: 100,
-                                          backgroundImage: FileImage(
-                                            File(imageFile!.path),
-                                          ),
-                                        ),
-                                  const Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: SizedBox(
-                                      height: 50,
-                                      width: 50,
-                                      child: Icon(
-                                        Icons.add_a_photo_outlined,
-                                        color: Color.fromARGB(255, 233, 9, 210),
-                                        size: 40,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            );
+                            return SignupImageWidget(imageFile: imageFile);
                           },
                         ),
                       ),
@@ -104,6 +74,8 @@ class SignupScreen extends StatelessWidget {
                         label: "Password",
                         controller: passwordController,
                         obscureText: true,
+                        onChanged: (value) {
+                        },
                       ),
                       sbh20,
                       InputField(
@@ -131,42 +103,34 @@ class SignupScreen extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
-                          return SizedBox(
-                            width: width * 70,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (passwordController.text !=
-                                    repasswordController.text) {
-                                  showCustomSnackbar(
-                                      message: "password does not match",
-                                      context: context);
-                                  return;
-                                }
-                                SignUpCredentials signupCreds =
-                                    SignUpCredentials(
-                                        email: emailController.text.trim(),
-                                        password:
-                                            passwordController.text.trim(),
-                                        rePassword:
-                                            repasswordController.text.trim(),
-                                        name: nameController.text.trim(),
-                                        image: imageFile);
-                                BlocProvider.of<SignupBloc>(context)
-                                    .add(SignupRequestedEvent(signupCreds));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 233, 9, 210),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                              ),
-                              child: (state is SignupLoading)
-                                  ? const CircularProgressIndicator()
-                                  : const Text('Sign Up'),
-                            ),
+                          return CreateButtonWidget(
+                            function: () {
+                              if (nameController.text.trim().isEmpty ||
+                                  emailController.text.trim().isEmpty ||
+                                  passwordController.text.trim().isEmpty ||
+                                  repasswordController.text.trim().isEmpty) {
+                                showCustomSnackbar(
+                                    message: "Please Fill All Fields",
+                                    context: context);
+                                return;
+                              }
+                              if (passwordController.text !=
+                                  repasswordController.text) {
+                                showCustomSnackbar(
+                                    message: "password does not match",
+                                    context: context);
+                                return;
+                              }
+                              SignUpCredentials signupCreds = SignUpCredentials(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                  rePassword: repasswordController.text.trim(),
+                                  name: nameController.text.trim(),
+                                  image: imageFile);
+                              BlocProvider.of<SignupBloc>(context)
+                                  .add(SignupRequestedEvent(signupCreds));
+                            },
+                            title: "Sign Up",
                           );
                         },
                       ),

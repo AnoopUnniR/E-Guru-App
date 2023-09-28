@@ -10,7 +10,7 @@ import 'package:either_dart/either.dart';
 
 class AdminServices {
   final dio = Dio();
-  //all students
+  //api calls for getting all students
   Future<Either<MainFailures, List<UserModel>>>
       getAllStudentRepository() async {
     try {
@@ -18,10 +18,6 @@ class AdminServices {
           options: await HeaderToken.headerToken());
 
       if (response.statusCode == 200) {
-        // final data = [];
-        // for (var element in response.data) {
-        //   data.add(UserModel.fromJson(element));
-        // }
         List<UserModel> val =
             (response.data as List).map((e) => UserModel.fromJson(e)).toList();
         return Right(val);
@@ -42,10 +38,6 @@ class AdminServices {
           options: await HeaderToken.headerToken());
 
       if (response.statusCode == 200) {
-        // final data = [];
-        // for (var element in response.data) {
-        //   data.add(UserModel.fromJson(element));
-        // }
         List<UserTeacherModel> val =
             (response.data as List).map((e) => UserTeacherModel.fromJson(e)).toList();
         return Right(val);
@@ -56,6 +48,7 @@ class AdminServices {
       return const Left(MainFailures.clientFailures());
     }
   }
+  
 //requested teachers
   Future<Either<MainFailures, List<UserTeacherModel>>>
       getAllTeacherRequestsRepository() async {
@@ -64,10 +57,6 @@ class AdminServices {
           options: await HeaderToken.headerToken());
 
       if (response.statusCode == 200) {
-        // final data = [];
-        // for (var element in response.data) {
-        //   data.add(UserModel.fromJson(element));
-        // }
         List<UserTeacherModel> val =
             (response.data as List).map((e) => UserTeacherModel.fromJson(e)).toList();
         return Right(val);

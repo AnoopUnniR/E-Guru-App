@@ -1,11 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImage {
   static pickImage() async {
-    XFile? pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    return pickedImage;
+    final imagePicker = ImagePicker();
+    try {
+      XFile? pickedImage = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      return pickedImage;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }
 

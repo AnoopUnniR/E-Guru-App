@@ -22,6 +22,7 @@ class AuthenticationBloc
   AuthenticationBloc() : super(AuthenticationInitial()) {
     on<AuthenticationCheckEvent>((event, emit) async {
       String? token = await SaveToken.retreiveToken();
+      //checking internet connection
       bool isOnline = await checkInternetConnection();
       if (!isOnline) {
         return emit(AutheticationFailedNoInternet());

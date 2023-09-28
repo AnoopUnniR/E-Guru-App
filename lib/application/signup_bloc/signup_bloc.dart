@@ -22,10 +22,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SignupRequestedEvent>(
       (event, emit) async {
         emit(SignupLoading());
-        // await Future.delayed(const Duration(seconds: 3));
         try {
           response = await signupRepository.signupRequest(event.signupCreds);
-          // print("${response} response from signup bloc");
           if (response.statusCode == 201) {
             SignupResponse signupModel = SignupResponse.fromJson(response.data);
             emit(SignupAccepted(signupModel: signupModel));

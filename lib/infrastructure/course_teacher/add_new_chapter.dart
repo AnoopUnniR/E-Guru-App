@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eguru_app/domain/api_endpoints.dart';
-import 'package:eguru_app/domain/models/course_catagory/add_new_chapter_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/add_new_chapter_model.dart';
 import 'package:eguru_app/infrastructure/header_token/header_token.dart';
 
 class AddNewChapterRepository {

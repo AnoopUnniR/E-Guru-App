@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:eguru_app/domain/core/multipart_file_chooser/multipart_file.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:universal_io/io.dart'as universal ;
 
 class NewCourseModel {
   final String title;
@@ -28,7 +30,8 @@ class NewCourseModel {
       'duration': duration,
       'level': level,
       'teacher': teacher,
-      'image': await MultipartFile.fromFile(image.path),
+      'image':await multipartImageFunction(image)
+          
     });
 
     return formData;

@@ -1,5 +1,5 @@
 import 'package:eguru_app/application/video_player/video_player_bloc.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

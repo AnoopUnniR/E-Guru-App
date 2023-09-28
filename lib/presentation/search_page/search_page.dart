@@ -79,25 +79,36 @@ class SearchPage extends StatelessWidget {
                 child: Text("No Courses Found"),
               );
             }
-            return ListView.builder(
+            return width<10? ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: state.courses.length,
               itemBuilder: (context, index) {
                 CourseModel course = state.courses[index];
-                return InkWell(
-                  onTap: () {
-                    BlocProvider.of<CourseDetailsBloc>(context)
-                        .add(ChapterLoading(courseId: course.courseId));
-                    Navigator.pushNamed(context, courseDetailsPageRoute,
-                        arguments: course);
-                  },
-                  child: CourseCard(width: width, course: course),
-                );
+                return onClickCard(context, course, width);
               },
-            );
+            ): GridView.builder(
+                itemCount: state.courses.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, childAspectRatio: (width * 100) / 500),
+                itemBuilder: (context, index) {
+                  CourseModel course = state.courses[index];
+                  return onClickCard(context, course, width);
+                });
           },
         ),
       ),
     );
+  }
+
+  InkWell onClickCard(BuildContext context, CourseModel course, double width) {
+    return InkWell(
+                onTap: () {
+                  BlocProvider.of<CourseDetailsBloc>(context)
+                      .add(ChapterLoading(courseId: course.courseId));
+                  Navigator.pushNamed(context, courseDetailsPageRoute,
+                      arguments: course);
+                },
+                child: CourseCard(width: width, course: course),
+              );
   }
 }

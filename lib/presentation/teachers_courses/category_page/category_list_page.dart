@@ -1,5 +1,6 @@
 import 'package:eguru_app/application/course_catagory/course_catagory_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/create_button.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/category_page/add_category.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ class CreateCategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     int teacherId = ModalRoute.of(context)?.settings.arguments as int;
     TextEditingController categoryController = TextEditingController();
-    double width = MediaQuery.of(context).size.width / 100;
     return Container(
       decoration: scaffoldBackgroundDecoration(),
       child: Scaffold(
@@ -78,32 +78,18 @@ class CreateCategoryPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(
-                  width: width * 70,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AddNewCatagoryField(
-                              bloc:
-                                  BlocProvider.of<CourseCatagoryBloc>(context),
-                              categoryController: categoryController);
-                        },
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 233, 9, 210),
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                    ),
-                    child: const Text(
-                      "Add new Category",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                CreateButtonWidget(
+                  title: "Add New Category",
+                  function: () async {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AddNewCatagoryField(
+                            bloc: BlocProvider.of<CourseCatagoryBloc>(context),
+                            categoryController: categoryController);
+                      },
+                    );
+                  },
                 ),
                 sbh10
               ],

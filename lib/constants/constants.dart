@@ -1,11 +1,6 @@
 import 'package:eguru_app/domain/api_endpoints.dart';
 import 'package:flutter/material.dart';
 
-// Widget textWhite(String text) => Text(
-//       text,
-//       style: const TextStyle(color: Colors.white),
-//     );
-
 const double textFieldWidth = 300;
 const sbw5 = SizedBox(
   width: 5,
@@ -87,6 +82,12 @@ BoxDecoration scaffoldBackgroundDecoration() {
   );
 }
 
+const ButtonStyle elevatedButtonStyleColor = ButtonStyle(
+  backgroundColor: MaterialStatePropertyAll(
+    Color.fromARGB(255, 233, 9, 210),
+  ),
+);
+
 showCustomSnackbar({required String message, required BuildContext context}) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
@@ -103,7 +104,6 @@ imageUrlConvert(String url) {
   String imageUrl = "$baseUrl2$url";
   return imageUrl;
 }
-
 
 int hourConverter(int hour) {
   if (hour > 12) {

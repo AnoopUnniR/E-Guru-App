@@ -1,6 +1,7 @@
 import 'package:eguru_app/application/teacher_chapter/teacher_course_chaper_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/create_button.dart';
 import 'package:eguru_app/domain/models/course_catagory/course_response_model.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
@@ -11,7 +12,6 @@ import 'package:eguru_app/domain/api_endpoints.dart';
 
 class AddedCoursesPage extends StatelessWidget {
   const AddedCoursesPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 100;
@@ -42,136 +42,79 @@ class AddedCoursesPage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
+              
               return Column(
                 children: [
                   SizedBox(
                     height: height * 80,
                     child: state.course.isEmpty
-                        ? const Center(child: Text("No Courses Added",),)
-                        : GridView.builder(
-                            itemCount: state.course.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: width > 10
-                                        ? (width * 100) / 520
-                                        : ((width * 100) / 260),
-                                    crossAxisCount: width > 10 ? 2 : 1),
-                            itemBuilder: (context, index) {
-                              CourseResponseModel course = state.course[index];
-                              String imageUrl =
-                                  "$baseUrl${course.image.split('8000/').last}";
-                              return InkWell(
-                                onTap: () {
-                                  BlocProvider.of<TeacherCourseChaperBloc>(
-                                          context)
-                                      .add(
-                                    TeacherCourseChaperEvent.started(
-                                      course.id,
-                                    ),
-                                  );
-                                  Navigator.pushNamed(
-                                    context,
-                                    teacherChaptersPageRoute,
-                                    arguments: course.id,
-                                  );
+                        ? const Center(
+                            child: Text(
+                              "No Courses Added",
+                            ),
+                          )
+                        : width > 10
+                            ? 
+                             GridView.builder(
+                                itemCount: state.course.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        childAspectRatio: (width * 100) / 520,
+                                        crossAxisCount: 2),
+                                itemBuilder: (context, index) {
+                                  CourseResponseModel course =
+                                      state.course[index];
+                                  String imageUrl =
+                                      "$baseUrl${course.image.split('8000/').last}";
+                                  return cocurseTileFunctions(context, course,
+                                      width, imageUrl, teacherModel);
                                 },
-                                child: TeachersCoursesTile(
-                                  width: width,
-                                  imageUrl: imageUrl,
-                                  course: course,
-                                  teacherModel: teacherModel,
-                                ),
-                              );
-                            },
-                          ),
-                    //       : width < 10
-                    //           ? ListView.builder(
-                    //               itemCount: state.course.length,
-                    //               itemBuilder: (context, index) {
-                    //                 CourseResponseModel course =
-                    //                     state.course[index];
-                    //                 String imageUrl =
-                    //                     imageUrlConvert(course.image);
-                    //                 return InkWell(
-                    //                   onTap: () {
-                    //                     BlocProvider.of<TeacherCourseChaperBloc>(
-                    //                             context)
-                    //                         .add(
-                    //                       TeacherCourseChaperEvent.started(
-                    //                         course.id,
-                    //                       ),
-                    //                     );
-                    //                     Navigator.pushNamed(
-                    //                         context, teacherChaptersPageRoute,
-                    //                         arguments: course.id);
-                    //                   },
-                    //                   child: TeachersCoursesTile(
-                    //                     width: width,
-                    //                     imageUrl: imageUrl,
-                    //                     course: course,
-                    //                     teacherModel: teacherModel,
-                    //                   ),
-                    //                 );
-                    //               },
-                    //               shrinkWrap: true,
-                    //               padding: const EdgeInsets.all(16),
-                    //             )
-                    //           : GridView.builder(
-                    //               itemCount: state.course.length,
-                    //               gridDelegate:
-                    //                   SliverGridDelegateWithFixedCrossAxisCount(
-                    //                       crossAxisCount: 2,
-                    //                       childAspectRatio: (width * 100) / 600),
-                    //               itemBuilder: (context, index) {
-                    //                 CourseResponseModel course =
-                    //                     state.course[index];
-                    //                 String imageUrl =
-                    //                     "$baseUrl${course.image.split('8000/').last}";
-                    //                 return InkWell(
-                    //                   onTap: () {
-                    //                     BlocProvider.of<TeacherCourseChaperBloc>(
-                    //                             context)
-                    //                         .add(TeacherCourseChaperEvent.started(
-                    //                             course.id));
-                    //                     Navigator.pushNamed(
-                    //                         context, teacherChaptersPageRoute,
-                    //                         arguments: course.id);
-                    //                   },
-                    //                   child: TeachersCoursesTile(
-                    //                     width: width,
-                    //                     imageUrl: imageUrl,
-                    //                     course: course,
-                    //                     teacherModel: teacherModel,
-                    //                   ),
-                    //                 );
-                    //               },
-                    //             ),
+                              ):ListView.builder(
+                                itemCount: state.course.length,
+                                itemBuilder: (context, index) {
+                                  CourseResponseModel course =
+                                      state.course[index];
+                                  String imageUrl =
+                                      "$baseUrl${course.image.split('8000/').last}";
+                                  return cocurseTileFunctions(context, course,
+                                      width, imageUrl, teacherModel);
+                                },
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(16),
+                              )
                   ),
-                  Container(
-                    constraints:const BoxConstraints(maxWidth: 400),
-                    width: width * 70,
-                    child: ElevatedButton(
-                      onPressed: () {
+                  CreateButtonWidget(
+                      function: () {
                         Navigator.pushNamed(context, catagoryPageRoute,
                             arguments: teacherModel.id);
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 233, 9, 210),
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      child:
-                          //  const CircularProgressIndicator()
-                          const Text('Add New Course'),
-                    ),
-                  )
+                      title: 'Add New Course'),
                 ],
               );
             },
           ),
         ),
+      ),
+    );
+  }
+
+  InkWell cocurseTileFunctions(BuildContext context, CourseResponseModel course,
+      double width, String imageUrl, UserTeacherModel teacherModel) {
+    return InkWell(
+      onTap: () {
+        BlocProvider.of<TeacherCourseChaperBloc>(context).add(
+          TeacherCourseChaperEvent.started(
+            course.id,
+          ),
+        );
+        Navigator.pushNamed(context, teacherChaptersPageRoute,
+            arguments: course.id);
+      },
+      child: TeachersCoursesTile(
+        width: width,
+        imageUrl: imageUrl,
+        course: course,
+        teacherModel: teacherModel,
       ),
     );
   }

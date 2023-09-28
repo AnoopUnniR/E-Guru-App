@@ -9,6 +9,10 @@ class InputField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final int? minLines;
+  final Function(PointerDownEvent)? onTapOutside;
+  final String? Function(String?)? validator;
+  final Function(String)? onChanged;
+  final bool isError ;
   const InputField(
       {super.key,
       required this.label,
@@ -18,7 +22,10 @@ class InputField extends StatelessWidget {
       this.enabled = true,
       this.maxLength,
       this.minLines,
-      this.maxLines = 1});
+      this.maxLines = 1,
+      this.onTapOutside,
+      this.validator,this.isError=false,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +33,12 @@ class InputField extends StatelessWidget {
     return SizedBox(
       width: width * 70,
       child: TextFormField(
+        onChanged: onChanged,
+        validator: validator,
+        enableSuggestions: true,
+        obscuringCharacter: "*",
+        cursorColor: Colors.white,
+        onTapOutside: onTapOutside,
         minLines: minLines,
         maxLines: maxLines,
         maxLength: maxLength,
@@ -35,6 +48,7 @@ class InputField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
+          error: !isError? null: const Text("format error"),
           // counterStyle: const TextStyle(fontSize: 0),
           focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(

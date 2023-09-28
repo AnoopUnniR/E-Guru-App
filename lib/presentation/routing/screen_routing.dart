@@ -3,11 +3,11 @@
 import 'package:eguru_app/presentation/courses_page/course_details/course_details_page.dart';
 import 'package:eguru_app/presentation/login_pages/login_screen.dart';
 import 'package:eguru_app/presentation/login_pages/otp_verification/otp_verify_page.dart';
-import 'package:eguru_app/presentation/login_pages/signup_page.dart';
+import 'package:eguru_app/presentation/login_pages/signup_page/signup_page.dart';
 import 'package:eguru_app/presentation/login_pages/teacher_signup/teacher_signup.dart';
 import 'package:eguru_app/presentation/main_page.dart/main_page.dart';
 import 'package:eguru_app/presentation/splash_screen/splash_screen.dart';
-import 'package:eguru_app/presentation/teachers_courses/add_chapters_page.dart';
+import 'package:eguru_app/presentation/teachers_courses/chapter_pages/add_chapters_page.dart';
 import 'package:eguru_app/presentation/teachers_courses/category_page/category_list_page.dart';
 import 'package:eguru_app/presentation/teachers_courses/chapter_pages/chapters_page.dart';
 import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/add_new_courses.dart';

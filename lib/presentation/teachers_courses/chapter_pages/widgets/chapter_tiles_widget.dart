@@ -1,7 +1,7 @@
 import 'package:eguru_app/application/admin_page_bloc/admin_chapters_list/admin_chapters_list_bloc.dart';
 import 'package:eguru_app/application/teacher_chapter/teacher_course_chaper_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:text_scroll/text_scroll.dart';

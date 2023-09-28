@@ -1,8 +1,8 @@
 import 'package:eguru_app/application/teacher_chapter/teacher_course_chaper_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
+import 'package:eguru_app/constants/create_button.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_model.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
-import 'package:eguru_app/presentation/teachers_courses/chapter_pages/widgets/add_chapter_button.dart';
 import 'package:eguru_app/presentation/teachers_courses/chapter_pages/widgets/chapter_tiles_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +72,10 @@ class TeacherChaptersPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  AddNewChapterButton(width: width, courseId: courseId)
+                  CreateButtonWidget(function:  () {
+          Navigator.pushNamed(context, addNewChapterPageRoute,
+              arguments: courseId);
+        }, title: "Add New Chapter")
                 ],
               );
             },

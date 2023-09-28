@@ -1,4 +1,3 @@
-
 import 'package:eguru_app/application/course_catagory/course_catagory_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
@@ -14,23 +13,34 @@ class AddNewCatagoryField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: const Color.fromARGB(255, 41, 45, 255),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             sbh10,
-            const Text("Create a new Category"),
-            sbh20,
-            InputField(
-              label: "Enter Category Name",
-              controller: categoryController,
+            const Text(
+              "Create a new Category",
+              style: TextStyle(color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 20),
             ),
-            sbh10,
+            sbh20,
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: InputField(
+                label: "Enter Category Name",
+                controller: categoryController,
+              ),
+            ),
+            sbh20,
             BlocProvider(
               create: (blocContext) => CourseCatagoryBloc(),
               child: ElevatedButton(
+                style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                        Color.fromARGB(255, 233, 9, 210))),
                 onPressed: () {
                   BlocProvider.of<CourseCatagoryBloc>(context)
                       .add(AddNewCourse(categoryController.text.trim()));

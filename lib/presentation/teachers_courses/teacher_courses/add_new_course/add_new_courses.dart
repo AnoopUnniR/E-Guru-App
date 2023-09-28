@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eguru_app/application/add_new_course/add_new_course_bloc.dart';
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
@@ -9,11 +7,13 @@ import 'package:eguru_app/domain/models/course_catagory/course_response_model.da
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
+import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/widgets/add_course_button.dart';
+import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/widgets/course_image_widget.dart';
+import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/widgets/edit_course_button.dart';
 import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/widgets/levels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_catagory/catagory_model.dart';
-import 'package:eguru_app/domain/models/course_catagory/create_course_model.dart';
 
 import 'package:image_picker/image_picker.dart';
 
@@ -68,232 +68,111 @@ class AddNewCoursesPage extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  sbh10,
-                  const Text(
-                    "Add New Course",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                  sbh10,
-                  const Text('Please enter your course details'),
-                  sbh20,
-                  BlocBuilder<AddNewCourseBloc, AddNewCourseState>(
-                    builder: (context, state) {
-                      return InkWell(
-                        onTap: () {
-                          handleTap(BlocProvider.of<AddNewCourseBloc>(context));
-                        },
-                        child: ValueListenableBuilder(
-                          valueListenable: imageValueNotifier,
-                          builder: (context, value, child) {
-                            return SizedBox(
-                              width: 200,
-                              height: 130,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: 130,
-                                    width: 200,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        image: value != null
-                                            ? DecorationImage(
-                                                image: FileImage(
-                                                  File(
-                                                    value.path,
-                                                  ),
-                                                ),
-                                                fit: BoxFit.cover,
-                                              )
-                                            : null),
-                                  ),
-                                  if (value == null)
-                                    const Center(
-                                      child: Text(
-                                        "Add Image Here",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    )
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  sbh20,
-                  InputField(
-                    label: "Title",
-                    controller: titleController,
-                    keyboardType: TextInputType.name,
-                  ),
-                  sbh20,
-                  // const AddCategoryWidget(),
-                  LevelsWidget(
-                    callback: getLevelValue,
-                  ),
-                  sbh20,
-                  InputField(
-                    label: "Description",
-                    controller: descriptionController,
-                    keyboardType: TextInputType.name,
-                    maxLines: null,
-                  ),
-                  sbh20,
-                  InputField(
-                    label: "Duration",
-                    controller: durationController,
-                    keyboardType: TextInputType.datetime,
-                  ),
-                  sbh40,
-                  SizedBox(
-                    width: width * 70,
-                    child: BlocConsumer<AddNewCourseBloc, AddNewCourseState>(
-                      listener: (context, state) {
-                        if (state.isLoaded) {
-                          showCustomSnackbar(
-                              message: "Course added successfully",
-                              context: context);
-                          Navigator.pushReplacementNamed(
-                            context,
-                            addNewChapterPageRoute,
-                            arguments: state.courseResponse!.id,
-                          );
-                        }
-                        if (state.isEdited) {
-                          showCustomSnackbar(
-                              message: "Course edited successfully",
-                              context: context);
-                          BlocProvider.of<TeacherCourseBloc>(context).add(
-                            TeacherCourseEvent.teacherCoursesLoaded(
-                                id: savedUserId),
-                          );
-                          Navigator.pop(context);
-                        }
-                      },
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    sbh10,
+                    const Text(
+                      "Add New Course",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    sbh10,
+                    const Text('Please enter your course details'),
+                    sbh20,
+                    BlocBuilder<AddNewCourseBloc, AddNewCourseState>(
                       builder: (context, state) {
-                        return isEdit
-                            ? ElevatedButton(
-                                onPressed: () async {
-                                  if (imageValueNotifier.value == null ||
-                                      titleController.text.trim().isEmpty ||
-                                      levelController.text.trim().isEmpty ||
-                                      descriptionController.text
-                                          .trim()
-                                          .isEmpty ||
-                                      durationController.text.trim().isEmpty) {
-                                    showCustomSnackbar(
-                                        message: "Please Fill All The Fields",
-                                        context: context);
-                                  }
-                                  if (courseModel != null) {
-                                    if (titleController.text ==
-                                            courseModel!.title &&
-                                        levelController.text ==
-                                            courseModel!.level &&
-                                        descriptionController.text ==
-                                            courseModel!.desc &&
-                                        durationController.text ==
-                                            courseModel!.duration) {
-                                      showCustomSnackbar(
-                                          message:
-                                              "No values has been changed. Please click cancel if you want to cancel editing",
-                                          context: context);
-                                    }
-                                  }
-
-                                  NewCourseModel newCourseModel =
-                                      NewCourseModel(
-                                          title: titleController.text,
-                                          category: [
-                                            categoryModel?.id ??
-                                                courseModel!.category.id
-                                          ],
-                                          image: imageValueNotifier.value!,
-                                          description:
-                                              descriptionController.text,
-                                          duration: durationController.text,
-                                          level: levelController.text,
-                                          teacher: savedUserId);
-                                  BlocProvider.of<AddNewCourseBloc>(context)
-                                      .add(AddNewCourseEvent.courseEdited(
-                                          newCourseModel, courseModel!.id));
-                                  isEdit = false;
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 233, 9, 210),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                ),
-                                child: state.isLoading
-                                    ? const CircularProgressIndicator()
-                                    : const Text('Save'),
-                              )
-                            : ElevatedButton(
-                                onPressed: () async {
-                                  FocusScope.of(context).unfocus();
-                                  if (imageValueNotifier.value == null ||
-                                      titleController.text.trim().isEmpty ||
-                                      levelController.text.trim().isEmpty ||
-                                      descriptionController.text
-                                          .trim()
-                                          .isEmpty ||
-                                      durationController.text.trim().isEmpty) {
-                                    showCustomSnackbar(
-                                        message: "Please Fill All The Fields",
-                                        context: context);
-                                  }
-                                  NewCourseModel newCourseModel =
-                                      NewCourseModel(
-                                          title: titleController.text,
-                                          category: [
-                                            categoryModel?.id ??
-                                                courseModel!.category.id
-                                          ],
-                                          image:
-                                              imageValueNotifier
-                                                      .value ??
-                                                  XFile("null"),
-                                          description:
-                                              descriptionController.text,
-                                          duration: durationController.text,
-                                          level: levelController.text,
-                                          teacher: savedUserId);
-                                  BlocProvider.of<AddNewCourseBloc>(context)
-                                      .add(AddNewCourseEvent.courseAdded(
-                                          newCourseModel));
-                                  // imagevalueNotifier.dispose();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 233, 9, 210),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                  ),
-                                ),
-                                child: state.isLoading
-                                    ? const CircularProgressIndicator()
-                                    : const Text('Add Course'),
-                              );
+                        return InkWell(
+                          onTap: () {
+                            handleTap(
+                                BlocProvider.of<AddNewCourseBloc>(context));
+                          },
+                          child: CourseImageWidget(
+                              imageValueNotifier: imageValueNotifier),
+                        );
                       },
                     ),
-                  ),
-                  sbh20,
-                  cancelButtonWidget(width, context),
-                  sbh20
-                ],
+                    sbh20,
+                    InputField(
+                      label: "Title",
+                      controller: titleController,
+                      keyboardType: TextInputType.name,
+                    ),
+                    sbh20,
+                    // const AddCategoryWidget(),
+                    LevelsWidget(
+                      callback: getLevelValue,
+                    ),
+                    sbh20,
+                    InputField(
+                      label: "Description",
+                      controller: descriptionController,
+                      keyboardType: TextInputType.name,
+                      maxLines: null,
+                    ),
+                    sbh20,
+                    InputField(
+                      label: "Duration",
+                      controller: durationController,
+                      keyboardType: TextInputType.datetime,
+                    ),
+                    sbh40,
+                    SizedBox(
+                      width: width * 70,
+                      child: BlocConsumer<AddNewCourseBloc, AddNewCourseState>(
+                        listener: (context, state) {
+                          if (state.isLoaded) {
+                            showCustomSnackbar(
+                                message: "Course added successfully",
+                                context: context);
+                            Navigator.pushReplacementNamed(
+                              context,
+                              addNewChapterPageRoute,
+                              arguments: state.courseResponse!.id,
+                            );
+                          }
+                          if (state.isEdited) {
+                            showCustomSnackbar(
+                                message: "Course edited successfully",
+                                context: context);
+                            BlocProvider.of<TeacherCourseBloc>(context).add(
+                              TeacherCourseEvent.teacherCoursesLoaded(
+                                  id: savedUserId),
+                            );
+                            Navigator.pop(context);
+                          }
+                        },
+                        builder: (context, state) {
+                          return isEdit
+                              ? EditCourseButtonWidget(
+                                  state: state,
+                                  imageValueNotifier: imageValueNotifier,
+                                  titleController: titleController,
+                                  levelController: levelController,
+                                  descriptionController: descriptionController,
+                                  durationController: durationController,
+                                  courseModel: courseModel,
+                                  categoryModel: categoryModel)
+                              : AddCourseButtonWidget(
+                                  state: state,
+                                  imageValueNotifier: imageValueNotifier,
+                                  titleController: titleController,
+                                  levelController: levelController,
+                                  descriptionController: descriptionController,
+                                  durationController: durationController,
+                                  categoryModel: categoryModel,
+                                  courseModel: courseModel,
+                                );
+                        },
+                      ),
+                    ),
+                    sbh20,
+                    cancelButtonWidget(width, context),
+                    sbh20
+                  ],
+                ),
               ),
             ),
           ),

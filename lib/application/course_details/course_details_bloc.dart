@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_model.dart';
 import 'package:eguru_app/domain/models/course_reviews_model/course_reviews_model.dart';
 import 'package:eguru_app/infrastructure/course/enroll_course.dart';
 import 'package:eguru_app/infrastructure/reviews/review_implementation.dart';

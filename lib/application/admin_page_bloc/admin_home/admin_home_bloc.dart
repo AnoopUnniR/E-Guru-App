@@ -18,6 +18,7 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
   CategoryRepository categoryRepository = CategoryRepository();
   CourseRepository courseRepository = CourseRepository();
   AdminHomeBloc() : super(AdminHomeState.initial()) {
+    // collects all the lists and loads it in the admin home page
     on<_Started>((event, emit) async {
       emit(state.copyWith(
           teacherListLoading: true,
@@ -29,6 +30,8 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
       add(const AdminHomeEvent.categoryListEvent());
       add(const AdminHomeEvent.courseListEvent());
     });
+
+    //collects teachers requests
     on<TeacherRequestListEvent>((event, emit) async {
       final teacherRequest =
           await adminServices.getAllTeacherRequestsRepository();
@@ -41,6 +44,7 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
       );
       emit(states);
     });
+    //collects teachers list
     on<TeacherListEvent>((event, emit) async {
       final teacherList = await adminServices.getAllTeachersRepository();
       final states1 = teacherList.fold(
@@ -50,6 +54,8 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
       );
       emit(states1);
     });
+
+    //collects students list
     on<StudentListEvent>((event, emit) async {
       final studentList = await adminServices.getAllStudentRepository();
       final state2 = studentList.fold(
@@ -59,6 +65,8 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
       );
       emit(state2);
     });
+
+    //collects category lists
     on<CategoryListEvent>((event, emit) async {
       emit(state.copyWith(categoryListLoading: true));
       final response = await categoryRepository.allCatagory();
@@ -68,6 +76,8 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
               state.copyWith(categoryList: right, categoryListLoading: false));
       emit(states);
     });
+
+    //collect courses lists
     on<CourseListEvent>((event, emit) async {
       emit(state.copyWith(coursesListLoading: true));
       final response = await courseRepository.getAllCourses();

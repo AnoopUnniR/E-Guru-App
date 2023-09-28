@@ -53,8 +53,8 @@ class TeacherProfile extends StatelessWidget {
                 sbh40,
                 SizedBox(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      sbw20,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -72,7 +72,6 @@ class TeacherProfile extends StatelessWidget {
                             data: userTeacherModel.mobileNumber,
                             head: "Mobile",
                           ),
-                          sbh20,
                           sbh20,
                           textDetails(
                             width: width,
@@ -118,12 +117,11 @@ class TeacherProfile extends StatelessWidget {
     return SizedBox(
       width: width * 80,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(title),
-          const Text(" : "),
+          const Text("  :  "),
           Expanded(
-            // width: width * 60,
             child: Text(
               data,
               style: const TextStyle(fontSize: 20),

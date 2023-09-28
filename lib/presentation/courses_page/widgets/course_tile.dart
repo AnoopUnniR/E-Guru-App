@@ -53,7 +53,7 @@ class CourseCard extends StatelessWidget {
                       sbw20,
                       Container(
                         width: width > 10 ? width * 25 : width * 40,
-                        constraints: const BoxConstraints(maxWidth: 400),
+                        constraints: const BoxConstraints(maxWidth: 250),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

@@ -1,6 +1,6 @@
 import 'package:eguru_app/application/admin_page_bloc/admin_chapters_list/admin_chapters_list_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_model.dart';
 import 'package:eguru_app/presentation/admin_pages/pages/constants/admin_appbar.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/chapter_pages/widgets/chapter_tiles_widget.dart';

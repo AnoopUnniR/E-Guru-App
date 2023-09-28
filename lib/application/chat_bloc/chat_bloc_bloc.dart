@@ -39,14 +39,14 @@ class ChatBlocBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
     });
     on<Send>((event, emit) async {
       await appwriteChatRepository.sendMessage(event.message);
-      // add(const Update());
     });
     on<Update>((event, emit) {
-      
       emit(Reload(chats: chats, isLoading: false, num: chats.length));
     });
-    //[when using websocket]
 
+
+    //----[when using websocket]-------
+    //
     // channel.stream.listen((event) {
     //   Map<String, dynamic> eventData =
     //       json.decode(event); // Parse JSON string into map

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:eguru_app/domain/models/course_catagory/chapter_response_model.dart';
+import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_model.dart';
 import 'package:eguru_app/infrastructure/course_teacher/get_course_chapter.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
