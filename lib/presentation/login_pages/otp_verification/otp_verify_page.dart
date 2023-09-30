@@ -1,14 +1,14 @@
-
 import 'package:eguru_app/application/otp_verification/otp_verification_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/create_button.dart';
 import 'package:eguru_app/domain/models/signup_response_model.dart';
 import 'package:eguru_app/infrastructure/otp_verification/otp_verification_repository.dart';
 import 'package:eguru_app/infrastructure/user_data/get_user_data.dart';
 import 'package:eguru_app/presentation/login_pages/otp_verification/widgets/otp_box.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:flutter/material.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 class OtpVerificationPage extends StatelessWidget {
   final TextEditingController otpControllerOne = TextEditingController();
@@ -25,7 +25,6 @@ class OtpVerificationPage extends StatelessWidget {
     OtpVerificationRepository otpVerificationRepository =
         OtpVerificationRepository();
     UserDataRepository userDataRepository = UserDataRepository();
-    double width = MediaQuery.of(context).size.width / 100;
     final SignupResponse signupModel =
         ModalRoute.of(context)?.settings.arguments as SignupResponse;
     return Container(
@@ -45,7 +44,7 @@ class OtpVerificationPage extends StatelessWidget {
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
                 Container(
-                  constraints:const BoxConstraints(maxWidth: textFieldWidth),
+                  constraints: const BoxConstraints(maxWidth: textFieldWidth),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -77,37 +76,32 @@ class OtpVerificationPage extends StatelessWidget {
                           message: state.error, context: context);
                     }
                   }, builder: (context, state) {
+                    bool isLoading = false;
+                    if (state is OtpVerificationRequested) {
+                      isLoading = true;
+                    }
+                    if (state is OtpVerificationSuccess ||
+                        state is OtpVerificationFailed) {
+                      isLoading = false;
+                    }
                     return Column(
                       children: [
-                        SizedBox(
-                          width: width * 70,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              String otp = otpControllerOne.text +
-                                  otpControllerTwo.text +
-                                  otpControllerThree.text +
-                                  otpControllerFour.text +
-                                  otpControllerFive.text +
-                                  otpControllerSix.text;
-                              BlocProvider.of<OtpVerificationBloc>(context).add(
-                                  OtpSubmittedEvent(
-                                      email: signupModel.email,
-                                      id: signupModel.id,
-                                      otp: otp));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromARGB(255, 233, 9, 210),
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 20.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                            ),
-                            child: (state is OtpVerificationRequested)
-                                ? const CircularProgressIndicator()
-                                : const Text('Verify OTP'),
-                          ),
+                        CreateButtonWidget(
+                          isLoading: isLoading,
+                          title: "Verify OTP",
+                          function: () {
+                            String otp = otpControllerOne.text +
+                                otpControllerTwo.text +
+                                otpControllerThree.text +
+                                otpControllerFour.text +
+                                otpControllerFive.text +
+                                otpControllerSix.text;
+                            BlocProvider.of<OtpVerificationBloc>(context).add(
+                                OtpSubmittedEvent(
+                                    email: signupModel.email,
+                                    id: signupModel.id,
+                                    otp: otp),);
+                          },
                         ),
                         sbh20,
                         (state is OtpVerificationRequested)

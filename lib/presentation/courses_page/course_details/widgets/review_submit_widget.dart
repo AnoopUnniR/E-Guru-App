@@ -1,4 +1,3 @@
-
 import 'package:eguru_app/application/course_details/course_details_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,9 @@ class ReviewSubmitFieldWidget extends StatelessWidget {
           children: [
             Flexible(
               child: TextFormField(
+                cursorColor: Colors.white,
+                minLines: 1,
+                maxLines: 5,
                 style: const TextStyle(color: Colors.white),
                 controller: reviewController,
                 decoration: const InputDecoration(
@@ -75,7 +77,8 @@ class ReviewSubmitFieldWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-              child: const Text("Submit",style: TextStyle(color: Colors.white)),
+              child:
+                  const Text("Submit", style: TextStyle(color: Colors.white)),
             ),
           ],
         ),

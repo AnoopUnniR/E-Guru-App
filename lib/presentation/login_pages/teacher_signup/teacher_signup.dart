@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:eguru_app/constants/page_background_color.dart';
 
+import 'package:eguru_app/constants/cancel_button.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
@@ -8,7 +10,6 @@ import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
 File? resume;
 
@@ -184,21 +185,9 @@ class TeacherSignupPage extends StatelessWidget {
                     skillController: skillController,
                   ),
                   sbh20,
-                  SizedBox(
-                    width: width * 70,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 162, 11, 0),
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        ),
-                      ),
-                      child: const Text('Cancel'),
-                    ),
+                  cancelButtonWidget(
+                    width,
+                    context,
                   ),
                   sbh20
                 ],
@@ -232,7 +221,6 @@ class TeacherSignupPage extends StatelessWidget {
               Navigator.pop(context);
               // signupImage.value =
               //     await profileImageFunc.selectImage(ImageSource.gallery);
-              print("here");
             },
             title: const Text("Select From Gallery"),
           ),

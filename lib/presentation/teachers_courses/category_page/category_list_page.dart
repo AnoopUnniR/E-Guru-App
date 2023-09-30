@@ -1,6 +1,7 @@
 import 'package:eguru_app/application/course_catagory/course_catagory_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/constants/create_button.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/category_page/add_category.dart';
 import 'package:flutter/material.dart';

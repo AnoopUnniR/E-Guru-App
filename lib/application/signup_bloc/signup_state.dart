@@ -20,6 +20,9 @@ class SignupRejected extends SignupState {
 }
 
 class SignupImageLoading extends SignupState {
-  final CroppedFile image;
-  SignupImageLoading(this.image);
+  final CroppedFile? image;
+
+  SignupImageLoading(
+    this.image,
+  );
 }

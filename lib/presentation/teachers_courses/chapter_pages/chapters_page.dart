@@ -5,6 +5,7 @@ import 'package:eguru_app/domain/models/chapter_model.dart/chapter_response_mode
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/chapter_pages/widgets/chapter_tiles_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TeacherChaptersPage extends StatelessWidget {

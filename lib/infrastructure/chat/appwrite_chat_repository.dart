@@ -1,8 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
-import 'package:eguru_app/domain/core/appwrite/appwrite.dart';
 import 'package:eguru_app/domain/core/failures/main_failures.dart';
 import 'package:eguru_app/domain/models/chat_model/chat.dart';
+import 'package:eguru_app/domain/core/auth/keys.dart';
 import 'package:either_dart/either.dart';
 import 'package:uuid/uuid.dart';
 

@@ -13,6 +13,7 @@ import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_
 import 'package:eguru_app/presentation/teachers_courses/teacher_courses/add_new_course/widgets/levels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:eguru_app/domain/models/course_catagory/catagory_model.dart';
 
 import 'package:image_picker/image_picker.dart';

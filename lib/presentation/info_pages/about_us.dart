@@ -1,5 +1,5 @@
-import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});

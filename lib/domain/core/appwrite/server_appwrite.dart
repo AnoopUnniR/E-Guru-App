@@ -1,5 +1,5 @@
 import 'package:dart_appwrite/dart_appwrite.dart' as appwrite;
-import 'package:eguru_app/domain/core/appwrite/appwrite.dart';
+import 'package:eguru_app/domain/core/auth/keys.dart';
 
 class ServerApwrite{
  serverAppwriteGetClent() {

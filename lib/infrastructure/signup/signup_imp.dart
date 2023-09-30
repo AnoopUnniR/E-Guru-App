@@ -7,8 +7,8 @@ class SignupRepository {
   Future<Response> signupRequest(SignUpCredentials data) async {
     Response response;
     try {
-      response =
-          await dio.post(Url.singUpUrl, data:  await data.signUpCredentialstoFormData());
+      response = await dio.post(Url.singUpUrl,
+          data: await data.signUpCredentialstoFormData());
       return response;
     } catch (e) {
       throw Exception("something went wrong while signing up");

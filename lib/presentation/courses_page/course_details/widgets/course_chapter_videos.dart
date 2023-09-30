@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
 
-
 class ChapterVideoTiles extends StatelessWidget {
   const ChapterVideoTiles({
     super.key,
@@ -22,6 +21,7 @@ class ChapterVideoTiles extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
+          constraints:const BoxConstraints(maxWidth: 700),
           height: null,
           decoration: const BoxDecoration(
             color: Colors.transparent,
@@ -34,7 +34,7 @@ class ChapterVideoTiles extends StatelessWidget {
                     .add(TeacherCourseChaperEvent.started(course.courseId));
               }
               if (state.chapters.isEmpty) {
-                return const Center(child:  CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               return ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),

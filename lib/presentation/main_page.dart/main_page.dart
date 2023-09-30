@@ -1,5 +1,4 @@
 import 'package:eguru_app/application/course_page/course_page_bloc.dart';
-import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/presentation/courses_page/courses_page.dart';
@@ -11,6 +10,7 @@ import 'package:eguru_app/presentation/profile_page/profile_page.dart';
 import 'package:eguru_app/presentation/profile_page/teacher_profile.dart';
 import 'package:eguru_app/presentation/search_page/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenMainPage extends StatelessWidget {

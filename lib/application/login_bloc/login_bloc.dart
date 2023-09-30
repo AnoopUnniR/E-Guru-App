@@ -58,7 +58,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               }
             }
           } else {
-
             emit(LoginRejected(userResponse.data));
           }
         }

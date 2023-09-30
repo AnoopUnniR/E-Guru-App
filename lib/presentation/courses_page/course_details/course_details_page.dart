@@ -10,6 +10,7 @@ import 'package:eguru_app/presentation/courses_page/course_details/widgets/revie
 import 'package:eguru_app/presentation/courses_page/widgets/favorites_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
 
 class CourseDetailPage extends StatelessWidget {
@@ -72,7 +73,7 @@ class CourseDetailPage extends StatelessWidget {
                       sbh10,
                       Container(
                         constraints: const BoxConstraints(
-                            maxHeight: 300, minHeight: 150),
+                            maxWidth: 600, maxHeight: 300, minHeight: 150),
                         width: width * 85,
                         height: width * 50,
                         decoration: BoxDecoration(
@@ -144,12 +145,12 @@ class CourseDetailPage extends StatelessWidget {
                         ),
                       ),
                       sbh20,
-                      Align(
+                      const Align(
                         alignment: Alignment.bottomLeft,
                         child: Text(
                           "Course Description",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: width * 5),
+                              fontWeight: FontWeight.bold, fontSize: 30),
                         ),
                       ),
                       Padding(
@@ -162,13 +163,13 @@ class CourseDetailPage extends StatelessWidget {
                         ),
                       ),
                       sbh20,
-                      Align(
+                     const Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Reviews",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: width * 5,
+                            fontSize: 30,
                           ),
                         ),
                       ),

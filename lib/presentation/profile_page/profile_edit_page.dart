@@ -1,4 +1,4 @@
-import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEditPage extends StatelessWidget {

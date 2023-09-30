@@ -6,6 +6,7 @@ import 'package:eguru_app/presentation/admin_pages/admin_home_page.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/login_button.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,16 +73,18 @@ class LoginScreen extends StatelessWidget {
                     },
                     builder: (context, state) {
                       return Container(
-                        constraints: const BoxConstraints(maxWidth: textFieldWidth),
+                        constraints:
+                            const BoxConstraints(maxWidth: textFieldWidth),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            sbh20,
                             // CircleAvatar(radius: width*20),
                             const Text(
                               "Welcome",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             sbh10,
                             const Text('please Login into your existing'),
@@ -158,4 +161,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-

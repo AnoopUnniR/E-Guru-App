@@ -1,11 +1,11 @@
 import 'package:eguru_app/application/teacher_chapter/teacher_course_chaper_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
-import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/constants/create_button.dart';
 import 'package:eguru_app/domain/models/course_catagory/course_response_model.dart';
 import 'package:eguru_app/domain/models/teachers_model/teachers_user_mode.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/teacher_courses/widgets/teacher_courses_tile.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/api_endpoints.dart';

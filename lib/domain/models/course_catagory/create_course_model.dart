@@ -30,7 +30,7 @@ class NewCourseModel {
       'duration': duration,
       'level': level,
       'teacher': teacher,
-      'image':await multipartImageFunction(image)
+      'image':await multipartImageFunction(image),
           
     });
 

@@ -1,16 +1,17 @@
 import 'package:eguru_app/application/authentication_bloc/authentication_bloc.dart';
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/domain/core/share_app/share_app.dart';
 import 'package:eguru_app/infrastructure/image_provider/image_provider.dart';
 import 'package:eguru_app/presentation/info_pages/about_us.dart';
 import 'package:eguru_app/presentation/info_pages/privacy_policy.dart';
+import 'package:eguru_app/presentation/main_page.dart/widgets/restart_app.dart';
 import 'package:eguru_app/presentation/profile_page/widgets/logout_button.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/presentation/teachers_courses/messages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:restart_app/restart_app.dart';
 
 class DrawerContainerWidget extends StatelessWidget {
   const DrawerContainerWidget({
@@ -160,42 +161,18 @@ class DrawerContainerWidget extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              title: const Text(
-                                "Restart App?",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              content: const Text(
-                                "Do you want to Restart the App?",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              actions: [
-                                ElevatedButton(
-                                  style: const ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Color.fromARGB(255, 233, 9, 210),
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    await Restart.restartApp();
-                                  },
-                                  child: const Text("Confirm"),
-                                ),
-                                ElevatedButton(
-                                  style: const ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Color.fromARGB(255, 233, 9, 210),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("Cancel"),
-                                )
-                              ],
-                            );
+                            return const RestartAppWidget();
                           },
                         );
+                      },
+                    ),
+                   if(!kIsWeb) ListTile(
+                      title: const Text(
+                        "Share App",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
+                      onTap: () {
+                        ShareApp().shareApp();
                       },
                     ),
                   ],

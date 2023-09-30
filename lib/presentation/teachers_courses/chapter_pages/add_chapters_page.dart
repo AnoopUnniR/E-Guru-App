@@ -5,6 +5,7 @@ import 'package:eguru_app/application/authentication_bloc/authentication_bloc.da
 import 'package:eguru_app/application/teacher_course/teacher_course_bloc.dart';
 import 'package:eguru_app/constants/cancel_button.dart';
 import 'package:eguru_app/constants/constants.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

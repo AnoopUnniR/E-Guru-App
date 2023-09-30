@@ -4,6 +4,7 @@ import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/presentation/main_page.dart/widgets/bottom_nav.dart';
 import 'package:eguru_app/presentation/profile_page/widgets/logout_button.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

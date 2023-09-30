@@ -1,4 +1,5 @@
 import 'package:eguru_app/application/course_details/course_details_bloc.dart';
+import 'package:eguru_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eguru_app/domain/models/course_model/course_model.dart';
@@ -8,7 +9,6 @@ class EnrollButtonWidget extends StatelessWidget {
       {super.key,
       required this.width,
       required this.course,
-      required,
       required this.state});
 
   final double width;
@@ -29,17 +29,13 @@ class EnrollButtonWidget extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                backgroundColor: Colors.blue[400],
-                title: const Text("Unenroll?"),
+                backgroundColor: Colors.white,
+                title: const Text("Unenroll?",style: TextStyle(color: Colors.black),),
                 content:
-                    const Text("Do you wish to unenroll from this course?"),
+                    const Text("Do you wish to unenroll from this course?",style: TextStyle(color: Colors.black)),
                 actions: [
                   ElevatedButton(
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromARGB(255, 233, 9, 210),
-                        ),
-                      ),
+                      style: elevatedButtonStyleColor,
                       onPressed: () {
                         Navigator.pop(context);
                         BlocProvider.of<CourseDetailsBloc>(context)
@@ -47,11 +43,7 @@ class EnrollButtonWidget extends StatelessWidget {
                       },
                       child: const Text("Confirm")),
                   ElevatedButton(
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromARGB(255, 233, 9, 210),
-                        ),
-                      ),
+                      style: elevatedButtonStyleColor,
                       onPressed: () {
                         Navigator.pop(context);
                       },

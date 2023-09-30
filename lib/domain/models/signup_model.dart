@@ -1,6 +1,7 @@
 //model for converting signup credentials into json for post method body
 import 'package:dio/dio.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:eguru_app/domain/core/multipart_file_chooser/multipart_file.dart';
 
 class SignUpCredentials {
   final String email;
@@ -14,7 +15,8 @@ class SignUpCredentials {
       required this.password,
       required this.rePassword,
       required this.name,
-      this.image});
+      this.image,
+     });
 
   Map<String, dynamic> signUpCredentialstojson() {
     return {
@@ -25,14 +27,13 @@ class SignUpCredentials {
     };
   }
 
-  
   Future<FormData> signUpCredentialstoFormData() async {
     FormData form = FormData.fromMap({
       "email": email,
       "password": password,
       "re_password": rePassword,
       "name": name,
-      'image': image==null? null: await MultipartFile.fromFile(image!.path)
+      'image': await multipartImageFunction(image)
     });
     return form;
   }

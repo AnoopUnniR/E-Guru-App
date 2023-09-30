@@ -1,5 +1,5 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:eguru_app/domain/core/appwrite/appwrite.dart';
+import 'package:eguru_app/domain/core/auth/keys.dart';
 
 class AppwriteRealtime {
   RealtimeSubscription getSubcription(Client client, int collectionId) {

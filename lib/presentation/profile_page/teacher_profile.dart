@@ -4,6 +4,7 @@ import 'package:eguru_app/infrastructure/image_provider/image_provider.dart';
 import 'package:eguru_app/presentation/main_page.dart/widgets/bottom_nav.dart';
 import 'package:eguru_app/presentation/profile_page/widgets/details_text.dart';
 import 'package:eguru_app/presentation/profile_page/widgets/logout_button.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 
 class TeacherProfile extends StatelessWidget {

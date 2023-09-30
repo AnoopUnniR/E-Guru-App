@@ -8,6 +8,7 @@ import 'package:eguru_app/infrastructure/chat/appwrite_chat_repository.dart';
 import 'package:eguru_app/infrastructure/chat/appwrite_realtime.dart';
 import 'package:eguru_app/presentation/courses_page/chat_page/widgets/chat_bubble.dart';
 import 'package:eguru_app/presentation/courses_page/chat_page/widgets/chat_text_input.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,7 +90,6 @@ class ChatPage extends StatelessWidget {
                 //       curve: Curves.easeIn);
                 // }
               },
-              buildWhen: (previous, current) => true,
               builder: (context, state) {
                 if (state.isLoading) {
                   return const Center(child: CircularProgressIndicator());

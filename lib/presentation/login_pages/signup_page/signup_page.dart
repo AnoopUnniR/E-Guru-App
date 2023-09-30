@@ -6,12 +6,13 @@ import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
 import 'package:eguru_app/presentation/login_pages/signup_page/widget/signup_image_widget.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
+import 'package:flutter/foundation.dart';
+import 'package:eguru_app/constants/page_background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -25,7 +26,6 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CroppedFile? imageFile;
-
     return Container(
       decoration: scaffoldBackgroundDecoration(),
       child: Scaffold(
@@ -41,6 +41,7 @@ class SignupScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      sbh20,
                       const Text(
                         "Create an Account",
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -51,10 +52,14 @@ class SignupScreen extends StatelessWidget {
                       sbh10,
                       InkWell(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => imageChoiceWidget(context),
-                          );
+                          kIsWeb
+                              ? BlocProvider.of<SignupBloc>(context)
+                                  .add(SignupImage(ImageSource.gallery))
+                              : showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      imageChoiceWidget(context),
+                                );
                         },
                         child: BlocBuilder<SignupBloc, SignupState>(
                           builder: (context, state) {
@@ -74,8 +79,7 @@ class SignupScreen extends StatelessWidget {
                         label: "Password",
                         controller: passwordController,
                         obscureText: true,
-                        onChanged: (value) {
-                        },
+                        onChanged: (value) {},
                       ),
                       sbh20,
                       InputField(
@@ -103,7 +107,15 @@ class SignupScreen extends StatelessWidget {
                           }
                         },
                         builder: (context, state) {
+                          bool isLoading = false;
+                          if (state is SignupLoading) {
+                            isLoading = true;
+                          }
+                          if (state is SignupAccepted) {
+                            isLoading = false;
+                          }
                           return CreateButtonWidget(
+                            isLoading: isLoading,
                             function: () {
                               if (nameController.text.trim().isEmpty ||
                                   emailController.text.trim().isEmpty ||
@@ -136,25 +148,27 @@ class SignupScreen extends StatelessWidget {
                       ),
                       sbh20,
                       SizedBox(
-                        child: Column(children: [
-                          const Text('Already have an account?'),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                tapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text(
-                              "Login Here",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
+                        child: Column(
+                          children: [
+                            const Text('Already have an account?'),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text(
+                                "Login Here",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
-                          ),
-                        ]),
+                          ],
+                        ),
                       )
                     ],
                   ),
