@@ -10,7 +10,7 @@
 .svn/
 migrate_working_dir/
 /lib/domain/core/auth/keys.dart
-
+/lib/m.dart
 # IntelliJ related
 *.iml
 *.ipr
