@@ -5,14 +5,17 @@ import 'package:eguru_app/constants/cancel_button.dart';
 import 'package:eguru_app/constants/constants.dart';
 import 'package:eguru_app/domain/models/user_model/user_model.dart';
 import 'package:eguru_app/infrastructure/image_picker/pick_image.dart';
+import 'package:eguru_app/presentation/login_pages/teacher_signup/widgets/pdf_textfield.dart';
 import 'package:eguru_app/presentation/login_pages/teacher_signup/widgets/signup_button.dart';
+import 'package:eguru_app/presentation/login_pages/teacher_signup/widgets/teacher_signup_image_widget.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
 File? resume;
-
 class TeacherSignupPage extends StatelessWidget {
   TeacherSignupPage({super.key});
   final TextEditingController nameController = TextEditingController();
@@ -54,38 +57,27 @@ class TeacherSignupPage extends StatelessWidget {
                   const Text("enroll as a teacher"),
                   sbh20,
                   InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => imageChoiceWidget(context),
-                      );
+                    onTap: () async {
+                      CroppedFile? imageFile;
+                      if (kIsWeb) {
+                        XFile? image;
+                        image = await PickImage.pickImage();
+                        if (image == null) return;
+                        imageFile = CroppedFile(image.path);
+                        signupImage.value = imageFile;
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) => imageChoiceWidget(context),
+                        );
+                      }
                     },
                     child: ValueListenableBuilder(
                       valueListenable: signupImage,
                       builder: (context, value, child) {
-                        return Container(
-                          padding: value == null
-                              ? const EdgeInsets.all(10)
-                              : EdgeInsets.zero,
-                          height: width * 50,
-                          width: width * 50,
-                          decoration: value == null
-                              ? const BoxDecoration(
-                                  image: DecorationImage(
-                                    alignment: Alignment.center,
-                                    image: AssetImage("assets/add.image.jpg"),
-                                  ),
-                                )
-                              : BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.contain,
-                                    image: FileImage(
-                                      File(
-                                        value.path,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                        return TeacherSingupImageWidget(
+                          width: width,
+                          value: value,
                         );
                       },
                     ),
@@ -131,47 +123,21 @@ class TeacherSignupPage extends StatelessWidget {
                     maxLines: null,
                   ),
                   sbh20,
+                  PdfTextFieldWidget(
+                    pdfController: pdfController,
+                    width: width,
+                    onpressed: () async {
+                      resume = await uploadPdf();
+                    },
+                  ),
+                  sbh20,
                   InputField(
                     label: "Address",
                     controller: adressController,
                     keyboardType: TextInputType.streetAddress,
                     maxLines: null,
                   ),
-                  sbh20,
-                  SizedBox(
-                    width: width * 70,
-                    child: Stack(
-                      children: [
-                        InputField(
-                          maxLines: null,
-                          label: "insert PDF here",
-                          controller: pdfController,
-                          keyboardType: TextInputType.streetAddress,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 5, right: 10),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                  Colors.white,
-                                ),
-                              ),
-                              child: const Text(
-                                "Insert",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              onPressed: () async {
-                                resume = await uploadPdf();
-                              },
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  
                   sbh40,
                   ApplyFormButton(
                     signupImage: signupImage.value,
@@ -200,7 +166,8 @@ class TeacherSignupPage extends StatelessWidget {
   }
 
   Future uploadPdf() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ["pdf"]);
     if (result != null) {
       File file = File(result.files.single.path ?? "");
       pdfController.text = file.path.split("/").last;
@@ -219,16 +186,16 @@ class TeacherSignupPage extends StatelessWidget {
             leading: const Icon(Icons.photo_album),
             onTap: () async {
               Navigator.pop(context);
-              // signupImage.value =
-              //     await profileImageFunc.selectImage(ImageSource.gallery);
+              signupImage.value =
+                  await profileImageFunc.selectImage(ImageSource.gallery);
             },
             title: const Text("Select From Gallery"),
           ),
           ListTile(
             onTap: () async {
               Navigator.pop(context);
-              // signupImage.value =
-              //     await profileImageFunc.selectImage(ImageSource.camera);
+              signupImage.value =
+                  await profileImageFunc.selectImage(ImageSource.camera);
             },
             leading: const Icon(Icons.camera_alt),
             title: const Text("Capture Live"),

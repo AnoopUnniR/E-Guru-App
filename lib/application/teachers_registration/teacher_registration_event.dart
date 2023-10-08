@@ -10,5 +10,5 @@ class TeachersRegistrationSubmittedEvent extends TeacherRegistrationEvent {
   final TeacherApplyModel teacherApplyModel;
 
   const TeachersRegistrationSubmittedEvent({required this.teacherApplyModel});
-
 }
+ 

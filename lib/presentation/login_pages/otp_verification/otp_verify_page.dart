@@ -104,16 +104,16 @@ class OtpVerificationPage extends StatelessWidget {
                           },
                         ),
                         sbh20,
-                        (state is OtpVerificationRequested)
-                            ? TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  "Resent OTP",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              )
-                            : sbh10
+                        // (state is OtpVerificationRequested)
+                        //     ? TextButton(
+                        //         onPressed: () {},
+                        //         child: const Text(
+                        //           "Resent OTP",
+                        //           style: TextStyle(
+                        //               color: Colors.white, fontSize: 18),
+                        //         ),
+                        //       )
+                        //     : sbh10
                       ],
                     );
                   }),

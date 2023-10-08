@@ -4,6 +4,7 @@ import 'package:eguru_app/infrastructure/login/login_implementation.dart';
 import 'package:eguru_app/infrastructure/user_data/get_user_data.dart';
 import 'package:eguru_app/presentation/admin_pages/admin_home_page.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/login_button.dart';
+import 'package:eguru_app/presentation/login_pages/widgets/new_user_button.dart';
 import 'package:eguru_app/presentation/login_pages/widgets/textformfield.dart';
 import 'package:eguru_app/presentation/routing/screen_routing.dart';
 import 'package:eguru_app/constants/page_background_color.dart';
@@ -72,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                       }
                     },
                     builder: (context, state) {
-                      return Container(
+                      return ConstrainedBox(
                         constraints:
                             const BoxConstraints(maxWidth: textFieldWidth),
                         child: Column(
@@ -106,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                                 emailController: emailController,
                                 passwordController: passwordController),
                             sbh20,
-                            forgotPasswordButton(context)
+                            newUserButton(context)
                           ],
                         ),
                       );
@@ -118,46 +119,6 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget forgotPasswordButton(
-    BuildContext context,
-  ) {
-    return SizedBox(
-      child: Column(children: [
-        const Text('Forgot your password?'),
-        TextButton(
-          style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-          onPressed: () {},
-          child: const Text(
-            "Click here",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-            ),
-          ),
-        ),
-        sbh20,
-        const Text('New User?'),
-        TextButton(
-          style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-          onPressed: () {
-            Navigator.pushNamed(context, signUpPageRoute);
-          },
-          child: const Text(
-            "Sign Up Here",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-            ),
-          ),
-        )
-      ]),
     );
   }
 }

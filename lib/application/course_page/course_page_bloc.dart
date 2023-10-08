@@ -15,8 +15,9 @@ class CoursePageBloc extends Bloc<CoursePageEvent, CoursePageState> {
     on<CourseEventStarted>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final response = await courseRepository.getAllCourses();
-      final states = response.fold((left) => state.copyWith(isError:true), (right) => state.copyWith(courses: right, isLoading: false));
-        emit(states);
+      final states = response.fold((left) => state.copyWith(isError: true),
+          (right) => state.copyWith(courses: right, isLoading: false));
+      emit(states);
     });
     on<CourseEventEnrolled>((event, emit) async {
       emit(state.copyWith(isLoading: true));

@@ -32,7 +32,8 @@ class InputField extends StatelessWidget {
     double width = MediaQuery.of(context).size.width / 100;
     return SizedBox(
       width: width * 70,
-      child: TextFormField(
+      child:
+       TextFormField(
         onChanged: onChanged,
         validator: validator,
         enableSuggestions: true,

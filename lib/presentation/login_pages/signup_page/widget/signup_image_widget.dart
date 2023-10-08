@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
+import 'package:eguru_app/constants/image_widget_function.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_cropper/image_cropper.dart';
@@ -19,27 +18,8 @@ class SignupImageWidget extends StatelessWidget {
       width: 200,
       child: Stack(
         children: [
-          imageFile == null
-              ? const CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage(
-                    
-                    "assets/profilepic.jpg",
-                  ),
-                )
-              : kIsWeb
-                  ? CircleAvatar(
-                      radius: 100,
-                      backgroundImage: NetworkImage(
-                        imageFile!.path,
-                      ),
-                    )
-                  : CircleAvatar(
-                      radius: 100,
-                      backgroundImage: FileImage(
-                        File(imageFile!.path),
-                      ),
-                    ),
+          CircleAvatar(
+              radius: 100, backgroundImage: imageChooserFunction(imageFile)),
           const Align(
             alignment: Alignment.bottomRight,
             child: SizedBox(

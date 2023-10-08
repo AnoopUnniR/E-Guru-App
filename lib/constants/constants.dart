@@ -2,6 +2,7 @@ import 'package:eguru_app/domain/api_endpoints.dart';
 import 'package:flutter/material.dart';
 
 const double textFieldWidth = 300;
+
 const sbw5 = SizedBox(
   width: 5,
 );
